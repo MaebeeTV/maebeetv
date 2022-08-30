@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       <div className="fixed -z-50 top-0 left-0 h-full w-full bg-gradient-to-br from-orange-400 via-[#FF23AC] to-purple-700"></div>
 
       <div className="flex-1 flex flex-col gap-6 pb-6 text-white">
-        <div className="py-16 text-3xl text-center bg-transparent">
+        <div className="py-32 font-bold text-5xl text-center bg-transparent">
           <h1>MaebeeTV Asks</h1>
         </div>
 

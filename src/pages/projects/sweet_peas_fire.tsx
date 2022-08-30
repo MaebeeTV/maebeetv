@@ -12,9 +12,10 @@ const Home: NextPage = () => {
       </Head>
       
       <div className="flex flex-col gap-6 pb-6 bg-[url('/img/SnowBackground.png')] bg-fixed bg-center bg-no-repeat bg-cover">
-        <div className="py-16 text-white text-3xl text-center bg-[#0084FF]">
+        <div className="py-32 font-bold text-5xl text-white  text-center bg-[#0084FF]">
           <h1>Sweet Pea&apos;s Fire</h1>
         </div>
+
         <div className="flex flex-col items-center gap-6 mx-12">
           <iframe
             className="w-3/4 md:h-[45em] h-[56vw]"
