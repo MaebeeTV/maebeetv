@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
       <div className="flex-1 flex flex-col gap-6 pb-6 text-white">
         <HeroHeader className="text-white bg-transparent">
-          Changing the world, one story at a time
+          MaebeeTV Asks
         </HeroHeader>
 
         <div className="flex md:items-center flex-1 gap-8 mx-12 flex-wrap md:flex-nowrap">

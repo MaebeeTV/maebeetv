@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       
       <div className="flex flex-col gap-6 pb-6 bg-[url('/img/SnowBackground.png')] bg-fixed bg-center bg-no-repeat bg-cover">
         <HeroHeader className="text-white bg-[#0084FF]">
-          Changing the world, one story at a time
+          Sweet Pea&apos;s Fire
         </HeroHeader>
 
         <div className="flex flex-col items-center gap-6 mx-12">
