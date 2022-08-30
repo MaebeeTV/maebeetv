@@ -16,3 +16,7 @@ export interface Route {
     path: string,
     show_in_nav: boolean
 }
+
+export interface RouteContainer extends Route {
+    routes: Route[]
+}

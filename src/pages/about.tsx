@@ -2,9 +2,9 @@ import { NextPage } from "next";
 
 const About: NextPage = () => {
     return (
-      <>
-        hi
-      </>
+      <div className="h-full">
+        
+      </div>
     );
 };
 
