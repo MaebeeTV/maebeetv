@@ -12,12 +12,12 @@ const Home: NextPage = () => {
       </Head>
       <div className="fixed -z-50 top-0 left-0 h-full w-full bg-gradient-to-br from-orange-400 via-[#FF23AC] to-purple-700"></div>
 
-      <div className="flex flex-col gap-6 pb-6 bg-fixed bg-center bg-no-repeat bg-cover">
+      <div className="flex-1 flex flex-col gap-6 pb-6 bg-fixed bg-center bg-no-repeat bg-cover">
         <div className="py-16 text-white text-3xl text-center bg-transparent">
           <h1>MaebeeTV Asks</h1>
         </div>
 
-        <div className="h-full flex gap-6 mx-12 flex-nowrap">
+        <div className="flex gap-6 mx-12 flex-nowrap">
           <div className="w-1/2">
             <iframe
               className=""

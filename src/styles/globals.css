@@ -5,6 +5,13 @@
 html, body, #__next {
     min-height: 100vh;
 }
+
+#__next {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .dark {
     background-color: #090909;
 }
