@@ -53,7 +53,7 @@ const Navbar: NextPage = () => {
                                     return (
                                         <li key={e.path} className={`${styles.navbar_button} ${e.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
                                             <Link href={e.path}>
-                                                <a>
+                                                <a onClick={() => { setNavbar(!navbar) }}>
                                                     {e.name}
                                                 </a>
                                             </Link>
