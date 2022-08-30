@@ -21,7 +21,6 @@ export const authOptions: NextAuthOptions = {
           }
         )).data as any[];
         const guild_ids = guilds.flatMap(e => e.id as string);
-        console.log(guild_ids)
         return (guild_ids.findIndex(e => e === process.env.DISCORD_ALLOWED_GUILD) !== -1);
       }
       return false;
