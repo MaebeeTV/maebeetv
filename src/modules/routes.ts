@@ -18,6 +18,16 @@ export const routes: Route[] = [
             bg_color: "[#0084FF]",
             text_color: "white"
         }
+    },
+    {
+        name: "MaebeeTV Asks",
+        path: "/projects/maebeetv_asks",
+        show_in_nav: true,
+
+        navbar_options: {
+            bg_color: "transparent",
+            text_color: "white"
+        }
     }
 ]
 
