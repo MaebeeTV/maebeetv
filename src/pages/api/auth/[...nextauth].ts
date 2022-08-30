@@ -13,14 +13,14 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ account }) {
       if (account.provider === "discord") {
-        const guilds: any[] = (await axios.get("https://discord.com/api/users/@me/guilds", 
+        const guilds: {id: string}[] = (await axios.get("https://discord.com/api/users/@me/guilds", 
           {
             headers: {
               Authorization: `Bearer ${account.access_token}`
             }
           }
-        )).data as any[];
-        const guild_ids = guilds.flatMap(e => e.id as string);
+        )).data;
+        const guild_ids = guilds.flatMap(e => e.id);
         return (guild_ids.findIndex(e => e === process.env.DISCORD_ALLOWED_GUILD) !== -1);
       }
       return false;
