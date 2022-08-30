@@ -48,6 +48,7 @@ model Session {
 model User {
     id            String    @id @default(cuid()) @map("_id")
     name          String?
+    discordName   String?   @unique
     email         String?   @unique
     emailVerified DateTime?
     image         String?
