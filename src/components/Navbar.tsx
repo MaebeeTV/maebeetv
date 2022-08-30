@@ -14,12 +14,16 @@ const Navbar: NextPage = () => {
 
     const found_route = routes.find((e) => e.path == router.route);
 
+    const title = found_route?.name ? `${found_route.name} -` : "";
+
     const navbar_options = found_route?.navbar_options;
 
     return (
         <header>
             <Head>
-                <title>{found_route?.name ? `${found_route.name} -` : "" } MaebeeTV</title>
+                <title>{title} MaebeeTV</title>
+                <meta property="og:title" content={title} />
+                <meta property="og:type" content="website" />
             </Head>
             <nav className={`bg-${navbar_options?.bg_color ? navbar_options.bg_color : "[#FF9DD0]"} sticky top-0 z-50 md:mt-0 md:py-0 py-3 text-${ navbar_options?.text_color ? navbar_options.text_color : "black" }`}>
                 <div className="container flex flex-wrap justify-between mx-auto items-stretch gap-3">
