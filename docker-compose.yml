@@ -1,14 +1,15 @@
-# mongodb docker compose for testing :3
-version: "3.8"
+version: '3.8'
 services:
-  mongodb:
-    image : mongo
-    container_name: mongodb
+  db:
+    image: postgres:14.5-alpine
+    restart: always
     environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - ./database:/data/db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
-      - 27017:27017
-    restart: unless-stopped
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
