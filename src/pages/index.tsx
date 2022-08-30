@@ -1,12 +1,13 @@
+import HeroHeader from "components/HeroHeader";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 const Home: NextPage = () => {
   return (
     <div className="flex flex-col mb-6">
-      <div className="py-32 text-black font-bold italic font-sans text-5xl text-center bg-[#FF9DD0]">
-        <h1>Changing the world, one story at a time</h1>
-      </div>
+      <HeroHeader className="font-sans italic">
+        Changing the world, one story at a time
+      </HeroHeader>
 
       <div className="flex flex-col gap-12 items-center mx-6">
         <div className="flex gap-6 items-center justify-center flex-wrap text-center min-h-[75vh]">

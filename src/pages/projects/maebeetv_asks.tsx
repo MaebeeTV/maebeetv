@@ -1,3 +1,4 @@
+import HeroHeader from "components/HeroHeader";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -13,9 +14,9 @@ const Home: NextPage = () => {
       <div className="fixed -z-50 top-0 left-0 h-full w-full bg-gradient-to-br from-orange-400 via-[#FF23AC] to-purple-700"></div>
 
       <div className="flex-1 flex flex-col gap-6 pb-6 text-white">
-        <div className="py-32 font-bold text-5xl text-center bg-transparent">
-          <h1>MaebeeTV Asks</h1>
-        </div>
+        <HeroHeader className="text-white bg-transparent">
+          Changing the world, one story at a time
+        </HeroHeader>
 
         <div className="flex md:items-center flex-1 gap-8 mx-12 flex-wrap md:flex-nowrap">
           <div className="md:w-7/12 w-full">

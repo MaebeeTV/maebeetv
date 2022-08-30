@@ -1,3 +1,4 @@
+import HeroHeader from "components/HeroHeader";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -12,9 +13,9 @@ const Home: NextPage = () => {
       </Head>
       
       <div className="flex flex-col gap-6 pb-6 bg-[url('/img/SnowBackground.png')] bg-fixed bg-center bg-no-repeat bg-cover">
-        <div className="py-32 font-bold text-5xl text-white  text-center bg-[#0084FF]">
-          <h1>Sweet Pea&apos;s Fire</h1>
-        </div>
+        <HeroHeader className="text-white bg-[#0084FF]">
+          Changing the world, one story at a time
+        </HeroHeader>
 
         <div className="flex flex-col items-center gap-6 mx-12">
           <iframe
