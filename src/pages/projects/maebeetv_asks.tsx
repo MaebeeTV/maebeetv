@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <div className="flex md:items-center flex-1 gap-8 mx-12 flex-wrap md:flex-nowrap">
           <div className="md:w-7/12 w-full">
             <iframe
-              className="w-full md:h-[50vh] h-56"
+              className="w-full md:h-[60vh] h-56"
               src="https://www.youtube.com/embed/r_fWFDubP_Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
             ></iframe>
             <p>MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
