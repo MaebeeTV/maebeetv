@@ -24,7 +24,7 @@ const ThemeSwitch = () => {
     }
 
     return (
-        <button className="mx-3 my-1 flex flex-1 justify-center items-center" title="Navigation" onClick={() => { setTheme(toggled_theme()) }}>
+        <button className="mx-3 my-1 flex flex-1 justify-center items-center" title="Toggle Theme" onClick={() => { setTheme(toggled_theme()) }}>
             <LightBulbIcon height="32px" />
         </button>
     )

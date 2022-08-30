@@ -23,8 +23,9 @@ const Home: NextPage = () => {
           <div className="text-center text-3xl md:text-4xl mb-2"><h1>Want to join our team?</h1></div>
           <div><p>Our company is commited to providing safe and friendly environments that can ensure the highest quality productions are created. Our films are made as a single team, with smaller groups assigned based on your own unique talents and quirks. Each team is given important tasks with flexible deadlines, all in the spirit of raising awareness and encouraging others to share their stories.</p></div>
           <div className="text-center mt-6 mb-3 text-xl"><h2>Use the form below to apply:</h2></div>
-          <iframe 
-            className="min-w-full h-[75vh]"
+          <iframe
+            allowTransparency={true}
+            className="min-w-full h-[75vh] bg-transparent border-none"
             src="https://docs.google.com/forms/d/e/1FAIpQLSdaBYNVmnUodH3BqEIymy7LIrWOhiGqPkH2OF0i-wPWj-YkQA/viewform?embedded=true"
           >
             Loading Google Form...
