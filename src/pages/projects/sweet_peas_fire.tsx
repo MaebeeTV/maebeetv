@@ -15,9 +15,9 @@ const Home: NextPage = () => {
         <div className="py-16 text-white text-3xl text-center bg-[#0084FF]">
           <h1>Sweet Pea&apos;s Fire</h1>
         </div>
-        <div className="flex flex-col gap-6 mx-12">
+        <div className="flex flex-col items-center gap-6 mx-12">
           <iframe
-            className="w-full md:h-[45em] h-[56vw]"
+            className="w-3/4 md:h-[45em] h-[56vw]"
             src="https://www.youtube.com/embed/HK_BAvuWsNA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
           ></iframe>
           <div className="md:w-[50%] md:my-72 md:text-right self-end text-white md:text-2xl text-lg leading-loose">
