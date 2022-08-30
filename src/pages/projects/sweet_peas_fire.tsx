@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-col gap-6 mx-12">
           <iframe
-            className="w-full md:h-[50em] h-[25em]"
+            className="w-full md:h-[45em] h-[56vw]"
             src="https://www.youtube.com/embed/HK_BAvuWsNA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
           ></iframe>
           <div className="md:w-[50%] md:my-72 md:text-right self-end text-white md:text-2xl text-lg leading-loose">
