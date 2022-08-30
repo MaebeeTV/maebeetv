@@ -2,16 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #__next {
-    min-height: 100vh;
-}
+@layer base {
+    html {
+        font-family: Georgia
+    }
 
-#__next {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.dark {
-    background-color: #090909;
+    html, body, #__next {
+        min-height: 100vh;
+    }
+    
+    #__next {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .dark {
+        background-color: #090909;
+    }
 }
