@@ -12,7 +12,7 @@ import { ThemeProvider } from 'next-themes'
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider attribute="class">
       <Navbar />
       <Component {...pageProps} />
     </ThemeProvider>
