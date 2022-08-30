@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
 import Head from "next/head";
 
+import styles from 'styles/Navbar.module.css'
+
 const Navbar: NextPage = () => {
     const [navbar, setNavbar] = useState(false);
     const router = useRouter();
@@ -19,7 +21,7 @@ const Navbar: NextPage = () => {
     const navbar_options = found_route?.navbar_options;
 
     return (
-        <header className={`bg-${navbar_options?.bg_color ? navbar_options.bg_color : "[#FF9DD0]"} sticky top-0 z-50 md:mt-0 md:py-0 py-3 text-${ navbar_options?.text_color ? navbar_options.text_color : "black" }`}>
+        <header className={`bg-${navbar_options?.bg_color ? navbar_options.bg_color : "[#FF9DD0]"} sticky top-0 z-50 md:mt-0 text-${ navbar_options?.text_color ? navbar_options.text_color : "black" }`}>
             <Head>
                 <title>{title} MaebeeTV</title>
                 <meta property="og:title" content={title} />
@@ -33,17 +35,23 @@ const Navbar: NextPage = () => {
                             <span className="">MaebeeTV Productions</span>
                         </a>
                     </Link>
-                    <button className="transition-all md:hidden px-3" title="Navigation" onClick={() => { setNavbar(!navbar) }}>
-                        <Bars3Icon height="32px" />
-                    </button>
-                    <ul className={`transition-all md:flex ${navbar ? "" : "hidden"} items-stretch md:w-auto w-full`}>
+                    <div className="md:hidden">
+                        <ul className={styles.navbar_button_list}>
+                            <li>
+                                <button className={`${styles.navbar_button} p-2 rounded-bl-xl overflow-hidden`} title="Navigation" onClick={() => { setNavbar(!navbar) }}>
+                                    <Bars3Icon height="32px" />
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul className={`${styles.navbar_button_list} ${navbar ? "" : "hidden"}`}>
                         {
                             routes.map((e) => {
                                 if (e.show_in_nav) {
                                     return (
-                                        <li key={e.path} className={`transition-all flex flex-1 items-stretch hover:backdrop-brightness-90 ${e.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
+                                        <li key={e.path} className={`${styles.navbar_button} ${e.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
                                             <Link href={e.path}>
-                                                <a className="flex flex-1 justify-center items-center p-3 md whitespace-nowrap">
+                                                <a>
                                                     {e.name}
                                                 </a>
                                             </Link>
@@ -52,7 +60,7 @@ const Navbar: NextPage = () => {
                                 }
                             })
                         }
-                        <li className="flex flex-1 hover:backdrop-brightness-90" >
+                        <li className={styles.navbar_button} >
                             <ThemeSwitch></ThemeSwitch>
                         </li>
                     </ul>

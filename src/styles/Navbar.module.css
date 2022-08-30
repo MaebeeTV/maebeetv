@@ -1,0 +1,11 @@
+.navbar_button_list {
+    @apply transition-all md:flex items-stretch md:w-auto w-full
+}
+
+.navbar_button {
+    @apply transition-all flex flex-1 items-stretch hover:backdrop-brightness-90
+}
+
+.navbar_button > a {
+    @apply flex flex-1 justify-center items-center p-3 whitespace-nowrap
+}
