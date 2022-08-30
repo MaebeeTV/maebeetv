@@ -7,13 +7,12 @@ import superjson from "superjson";
 import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 
+import Navbar from "components/Navbar";
+
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
-      <nav>
-        <ul className="mx">
-        </ul>
-      </nav>
+      <Navbar />
       
       <Component {...pageProps} />
     </>
