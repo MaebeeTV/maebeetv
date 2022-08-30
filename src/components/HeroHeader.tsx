@@ -14,6 +14,4 @@ const HeroHeader: NextPage<HeroHeaderProps> = ({ className, children }) => {
     )
 }
 
-"italic font-sans"
-
 export default HeroHeader;
