@@ -1,10 +1,11 @@
 import { NextPage } from "next";
-import { RouteContainer, routes } from "modules/routes";
+import { routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Bars3Icon } from '@heroicons/react/24/solid'
+import { Bars3Icon, LightBulbIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
+import ThemeSwitch from "./ThemeSwitch";
 
 const Navbar: NextPage = () => {
     const [navbar, setNavbar] = useState(false);
@@ -44,7 +45,9 @@ const Navbar: NextPage = () => {
                             }
                         })
                     }
-
+                    <li className="flex flex-1 hover:backdrop-brightness-90" >
+                        <ThemeSwitch></ThemeSwitch>
+                    </li>
                 </ul>
             </div>
         </nav>

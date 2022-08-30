@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 const Home: NextPage = () => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 pb-6">
       <div className="py-16 text-black text-3xl text-center bg-[#FF9DD0]">
         <h1>Changing the world, one story at a time</h1>
       </div>
