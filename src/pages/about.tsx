@@ -18,7 +18,7 @@ const About: NextPage = () => {
         <HeroHeader>
           About Us
         </HeroHeader>
-        <div className="flex font-semibold md:flex-row flex-col justify-items-stretch items-center m-6 gap-6">
+        <div className="flex mx-auto px-16 max-w-screen-xl font-semibold md:flex-row flex-col justify-items-stretch items-center m-6 gap-6">
           <div className="md:w-1/2 text-center">
             <Image width={562} height={350} src="/img/about/Camera.jpg" alt="camera"></Image>
           </div>
