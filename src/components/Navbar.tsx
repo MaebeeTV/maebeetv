@@ -16,7 +16,7 @@ const Navbar: NextPage = () => {
 
     const found_route = routes.find((e) => e.path == router.route);
 
-    const title = (found_route?.name ? `${found_route.name} -` : "") + "MaebeeTV";
+    const title = (found_route?.name ? `${found_route.name} - ` : "") + "MaebeeTV";
 
     const navbar_options = found_route?.navbar_options;
 
