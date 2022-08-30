@@ -3,7 +3,7 @@ import { routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Bars3Icon, LightBulbIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
 import Head from "next/head";
@@ -41,7 +41,7 @@ const Navbar: NextPage = () => {
                             routes.map((e) => {
                                 if (e.show_in_nav) {
                                     return (
-                                        <li key={e.path} className={`transition-all flex flex-1 items-stretch hover:backdrop-brightness-90 ${e.path == router.route ? "backdrop-brightness-125" : ""}`}>
+                                        <li key={e.path} className={`transition-all flex flex-1 items-stretch hover:backdrop-brightness-90 ${e.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
                                             <Link href={e.path}>
                                                 <a className="flex flex-1 justify-center items-center p-3 md whitespace-nowrap">
                                                     {e.name}
