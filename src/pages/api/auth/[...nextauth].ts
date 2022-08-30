@@ -12,7 +12,7 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     async signIn({ account }) {
-      if (account.provider === "discord") {
+      if (account.provider === "discord" && process.env.DISCORD_ALLOWED_GUILD) {
         const guilds: {id: string}[] = (await axios.get("https://discord.com/api/users/@me/guilds", 
           {
             headers: {
@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
           }
         )).data;
         const guild_ids = guilds.flatMap(e => e.id);
-        return (guild_ids.findIndex(e => e === process.env.DISCORD_ALLOWED_GUILD) !== -1);
+        return guild_ids.includes(process.env.DISCORD_ALLOWED_GUILD);
       }
       return false;
     },
