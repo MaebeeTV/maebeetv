@@ -9,7 +9,7 @@ import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 
 import { ThemeProvider } from 'next-themes'
-import MainLayout from "layouts/main";
+import MainLayout from "layout";
 import { NextPageWithLayout } from "next";
 
 const MyApp: AppType = ({ Component, pageProps }) => {

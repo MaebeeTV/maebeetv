@@ -1,9 +1,22 @@
-import { NextPage } from "next";
+import { NextPageWithLayout } from "next";
+import { ReactElement } from "react";
 
-const Dashboard: NextPage = () => {
+import DashboardLayout from "layout/dashboard";
+
+
+const Dashboard: NextPageWithLayout = () => {
     return (
         <>
         </>
     )
 }
+
+Dashboard.getLayout = (page: ReactElement) => {
+    return (
+        <DashboardLayout>
+            {page}
+        </DashboardLayout>
+    )
+};
+
 export default Dashboard;
