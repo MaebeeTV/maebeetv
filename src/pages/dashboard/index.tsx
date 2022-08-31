@@ -28,9 +28,9 @@ const Dashboard: NextPageWithLayout = () => {
                 ctx.setQueryData(["team.get_all"], optimisticUpdate);
             }
         },
-        // onSettled: () => {
-        //     ctx.invalidateQueries(["team.get_all"]);
-        // }
+        onSettled: () => {
+            ctx.invalidateQueries(["team.get_all"]);
+        }
     });
 
     if (isLoading || !messages) {
