@@ -1,6 +1,6 @@
 import Spinner from "components/Spinner";
 import { NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Login: NextPage = () => {

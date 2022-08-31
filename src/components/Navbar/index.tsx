@@ -2,16 +2,20 @@ import { routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useState } from "react";
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
 import Head from "next/head";
+
+import { useSession, signOut } from "next-auth/react";
 
 import styles from 'styles/Navbar.module.css'
 
 const Navbar: FC = () => {
     const [navbar, setNavbar] = useState(false);
     const router = useRouter();
+
+    const { data: session } = useSession();
 
     const found_route = routes.find((e) => e.path == router.route);
 
@@ -64,6 +68,15 @@ const Navbar: FC = () => {
                         <li className={styles.navbar_button} >
                             <ThemeSwitch></ThemeSwitch>
                         </li>
+                        {
+                           session ? (
+                            <li className={styles.navbar_button}>
+                                    <button className="mx-3 my-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { signOut({ callbackUrl: location.origin }) }}>
+                                        <ArrowLeftOnRectangleIcon height="32px" />
+                                    </button>
+                                </li>
+                            ) : (<></>)
+                        }
                     </ul>
                 </div>
             </nav>
