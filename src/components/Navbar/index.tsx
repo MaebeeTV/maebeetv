@@ -31,7 +31,7 @@ const Navbar: FC = () => {
                 <meta property="og:type" content="website" />
             </Head>
             <nav>
-                <div className="container flex flex-wrap justify-between mx-auto items-stretch gap-3">
+                <div className="container flex flex-wrap md:flex-nowrap justify-between mx-auto items-stretch gap-3">
                     <Link href="/">
                         <a className="flex items-center justify-center gap-3 mx-3">
                             <Image src="/img/MaebeeTV-logos.png" width="32" height="32" alt="MaebeeTV Logo" />
