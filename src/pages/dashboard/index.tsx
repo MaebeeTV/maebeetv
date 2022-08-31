@@ -1,6 +1,9 @@
 import { NextPage } from "next";
 
 const Dashboard: NextPage = () => {
-    return (<></>)
+    return (
+        <>
+        </>
+    )
 }
 export default Dashboard;
