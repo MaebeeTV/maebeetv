@@ -1,8 +1,7 @@
-import { NextPage } from "next";
 import { routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
@@ -10,7 +9,7 @@ import Head from "next/head";
 
 import styles from 'styles/Navbar.module.css'
 
-const Navbar: NextPage = () => {
+const Navbar: FC = () => {
     const [navbar, setNavbar] = useState(false);
     const router = useRouter();
 
