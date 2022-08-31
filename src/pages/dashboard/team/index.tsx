@@ -26,7 +26,7 @@ const TeamsPage: NextPageWithLayout = () => {
         }
     });
 
-    const [newTeamOpen, setNewTeamOpen] = useState(true);
+    const [newTeamOpen, setNewTeamOpen] = useState(false);
 
     if (isLoading || !messages || status === "loading" || !session) {
         return (
@@ -50,7 +50,7 @@ const TeamsPage: NextPageWithLayout = () => {
                                 onSubmit={(event) => {
                                     event.preventDefault();
                                     const { name, description } = event.target as any;
-                                    createTeam.mutate({ name: name.value, description: description.value })
+                                    createTeam.mutate({ name: name.value, description: description.value ? description.value : undefined  })
                                 }}
                             >
                                 <input name="name" className="w-full my-2 p-3 border-none" placeholder="Name" />
@@ -65,7 +65,7 @@ const TeamsPage: NextPageWithLayout = () => {
 
                 <div className="absolute top-0 left-0">
                     {session?.user?.clearance !== "User" ?
-                        <Button onClick={() => createTeam.mutate({ name: "New Team", description: "New Team Description" })}>Create Team</Button>
+                        <Button onClick={() => setNewTeamOpen(true)}>Create Team</Button>
                         : <></>
                     }
                 </div>
