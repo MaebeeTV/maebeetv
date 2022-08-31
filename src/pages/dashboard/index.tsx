@@ -6,9 +6,11 @@ import { trpc } from "utils/trpc";
 import Spinner from "components/Spinner";
 import Button from "components/Button";
 import Card from "components/Card";
+import { useSession } from "next-auth/react";
 
 const Dashboard: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
+    const { data: session, status } = useSession();
     const { data: messages, isLoading } = trpc.useQuery(["team.get_all"]);
     const createTeam = trpc.useMutation("team.create", {
         onMutate: () => {
@@ -23,7 +25,7 @@ const Dashboard: NextPageWithLayout = () => {
         }
     });
 
-    if (isLoading || !messages) {
+    if (isLoading || status === "loading" || !messages) {
         return (
           <div className="flex-1 flex justify-center items-center">
             <div>
@@ -32,11 +34,14 @@ const Dashboard: NextPageWithLayout = () => {
           </div>
         );
     }
-
+    console.log(session?.user)
     return (
         <div className="flex-1 m-6 relative">
             <div className="absolute top-0 left-0">
-                <Button onClick={() => createTeam.mutate({ name: "New Team", description: "New Team Description" })}>Create Team</Button>
+                { session?.user?.clearance !== "User" ?
+                    <Button onClick={() => createTeam.mutate({ name: "New Team", description: "New Team Description" })}>Create Team</Button> 
+                    : <></> 
+                }
             </div>
             <div className="my-16 flex justify-center gap-6 flex-wrap">
                 {
