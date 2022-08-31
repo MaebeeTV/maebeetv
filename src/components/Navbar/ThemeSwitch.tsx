@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from 'react'
 import { useTheme } from 'next-themes'
-import { LightBulbIcon } from '@heroicons/react/24/solid'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 
 const ThemeSwitch: FC = () => {
     const [mounted, setMounted] = useState(false)
@@ -25,7 +25,7 @@ const ThemeSwitch: FC = () => {
 
     return (
         <button className="mx-3 my-1 flex flex-1 justify-center items-center" title="Toggle Theme" onClick={() => { setTheme(toggled_theme()) }}>
-            <LightBulbIcon height="32px" />
+            { resolvedTheme === 'light' ? <MoonIcon height="32px" /> : <SunIcon height="32px" /> }
         </button>
     )
 }
