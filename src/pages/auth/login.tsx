@@ -1,9 +1,19 @@
 import Spinner from "components/Spinner";
 import { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { trpc } from "utils/trpc";
 
 const Login: NextPage = () => {
   const { data: session, status } = useSession();
+
+  const postMessage = trpc.useMutation("team.create");
+  
+  const createTeam = () => {
+    postMessage.mutate({
+      name: "Team",
+      description: "Empty",
+    });
+  }
 
   if (status === "loading") {
     return (
@@ -23,7 +33,7 @@ const Login: NextPage = () => {
           <p>
             hi {session.user?.name}
           </p>
-          <button onClick={() => { undefined }}>Create Team</button>
+          <button onClick={() => { createTeam() }}>Create Team</button>
           <button onClick={() => signOut()}>Logout</button>
         </div>
       ) : (

@@ -55,15 +55,13 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  teamIds String[] @db.ObjectId
-  teams   Team[]   @relation(fields: [teamIds], references: [id])
+  usersOnTeam UsersOnTeam[]
 
-  roleIds String[] @db.ObjectId
-  roles   Role[]   @relation(fields: [roleIds], references: [id])
+  usersWithRole UsersWithRole[]
 
-  authoredCalendarEntries  CalendarEntry[] @relation("authoredCalendarEntries")
-  receivedCalendarEntryIds String[]        @db.ObjectId
-  receivedCalendarEntries  CalendarEntry[] @relation("receivedCalendarEntries", fields: [receivedCalendarEntryIds], references: [id])
+  authoredCalendarEntries CalendarEntry[] @relation("authoredCalendarEntries")
+
+  receivedCalendarEntries UsersReceivedCalendarEntry[]
 
   clearance Clearance @default(User)
 }
@@ -85,28 +83,52 @@ enum Clearance {
   Technician
 }
 
-model Team {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  userIds String[] @db.ObjectId
-  users   User[]   @relation(fields: [userIds], references: [id])
+// Teams
+model UsersOnTeam {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  teamId String @db.ObjectId
+  team   Team   @relation(fields: [teamId], references: [id])
+}
 
-  roleIds   String[] @db.ObjectId
+model Team {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+
+  usersOnTeam UsersOnTeam[]
+
   roles     Role[]
   createdAt DateTime @default(now())
+}
 
-  calendarEntryIds String[]        @db.ObjectId
-  calendarEntries  CalendarEntry[] @relation(fields: [calendarEntryIds], references: [id])
+// Roles
+model UsersWithRole {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  roleId String @db.ObjectId
+  role   Role   @relation(fields: [roleId], references: [id])
 }
 
 model Role {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  teamId  String   @db.ObjectId
-  team    Team     @relation(fields: [teamId], references: [id])
-  userIds String[] @db.ObjectId
-  users   User[]   @relation(fields: [userIds], references: [id])
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
 
-  calendarEntryIds String[]        @db.ObjectId
-  calendarEntries  CalendarEntry[] @relation(fields: [calendarEntryIds], references: [id])
+  teamId        String          @db.ObjectId
+  team          Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  usersWithRole UsersWithRole[]
+}
+
+// Calendar Stuff
+model UsersReceivedCalendarEntry {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String        @db.ObjectId
+  user            User          @relation(fields: [userId], references: [id])
+  calendarEntryId String        @db.ObjectId
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
 }
 
 model CalendarEntry {
@@ -114,17 +136,10 @@ model CalendarEntry {
   createdAt   DateTime @default(now())
   endsAt      DateTime // utc time
   name        String
-  description String
+  description String?
 
   authorUserId String
   author       User   @relation("authoredCalendarEntries", fields: [authorUserId], references: [id])
 
-  receiversUserIds String[] @db.ObjectId
-  receivers        User[]   @relation("receivedCalendarEntries", fields: [receiversUserIds], references: [id])
-
-  teamIds String[] @db.ObjectId
-  teams   Team[]   @relation(fields: [teamIds], references: [id])
-
-  roleIds String[] @db.ObjectId
-  roles   Role[]   @relation(fields: [roleIds], references: [id])
+  receiversUserIds UsersReceivedCalendarEntry[]
 }
