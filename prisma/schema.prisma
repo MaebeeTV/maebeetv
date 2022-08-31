@@ -87,7 +87,7 @@ enum Clearance {
 model UsersOnTeam {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   teamId String @db.ObjectId
   team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
@@ -107,9 +107,9 @@ model Team {
 model UsersWithRole {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   roleId String @db.ObjectId
-  role   Role   @relation(fields: [roleId], references: [id])
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 }
 
 model Role {
