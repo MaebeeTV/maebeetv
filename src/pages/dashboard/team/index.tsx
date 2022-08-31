@@ -49,8 +49,19 @@ const TeamsPage: NextPageWithLayout = () => {
                             <form
                                 onSubmit={(event) => {
                                     event.preventDefault();
-                                    const { name, description } = event.target as any;
-                                    createTeam.mutate({ name: name.value, description: description.value ? description.value : undefined  })
+                                    const target = event.target as unknown as { [key: string]: { value?: string, name?: string } };
+                                    const value_map = Object.assign({}, 
+                                        ...(
+                                            Object.keys(event.target).map(e => {
+                                                const target_e = target[e];
+                                                if (target_e && target_e.name) {
+                                                    return { [target_e.name]: (target_e?.value ? target_e.value : undefined) }
+                                                }
+                                            }).filter(e => e)
+                                        )
+                                    );
+                                    console.log(value_map);
+                                    createTeam.mutate(value_map);
                                 }}
                             >
                                 <input name="name" className="w-full my-2 p-3 border-none" placeholder="Name" />
