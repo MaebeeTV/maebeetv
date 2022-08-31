@@ -7,6 +7,7 @@ import { prisma } from "../../../server/db/client";
 import { env } from "../../../env/server.mjs";
 
 import axios from "axios";
+import { User } from "@prisma/client";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -25,8 +26,9 @@ export const authOptions: NextAuthOptions = {
       }
       return false;
     },
-    session({ session, user }) {
+    async session({ session, user, }) {
       if (session.user) {
+        session.user
         session.user.id = user.id;
       }
       return session;
@@ -39,6 +41,22 @@ export const authOptions: NextAuthOptions = {
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
       authorization: { params: { scope: 'identify guilds email' } },
+      profile(profile) {
+        if (profile.avatar === null) {
+          const defaultAvatarNumber = parseInt(profile.discriminator) % 5
+          profile.image_url = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarNumber}.png`
+        } else {
+          const format = profile.avatar.startsWith("a_") ? "gif" : "png"
+          profile.image_url = `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.${format}`
+        }
+        return {
+          id: profile.id,
+          name: profile.username,
+          discordName: `${profile.username}#${profile.discriminator}`,
+          email: profile.email,
+          image: profile.image_url,
+        } as User
+      },
     }),
     // ...add more providers here
   ],
