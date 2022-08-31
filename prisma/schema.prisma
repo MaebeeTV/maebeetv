@@ -141,5 +141,5 @@ model CalendarEntry {
   authorUserId String
   author       User   @relation("authoredCalendarEntries", fields: [authorUserId], references: [id])
 
-  receiversUserIds UsersReceivedCalendarEntry[]
+  usersReceivedCalendarEntry UsersReceivedCalendarEntry[]
 }
