@@ -10,7 +10,7 @@ export const teamRouter = createRouter()
     description: z.optional(z.string()),
   }),
   async resolve({ ctx, input }) {
-    if (!ctx.session?.user) {
+    if (!ctx.session?.user || ctx.session.user?.clearance !== "User") {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     

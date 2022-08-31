@@ -1,4 +1,5 @@
 import { DefaultSession } from "next-auth";
+import { Clearance } from "@prisma/client";
 
 declare module "next-auth" {
   /**
@@ -8,6 +9,7 @@ declare module "next-auth" {
     user?: {
       id: string;
       discordName?: string;
+      clearance: Clearance;
     } & DefaultSession["user"];
   }
 }
