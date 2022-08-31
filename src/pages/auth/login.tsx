@@ -33,8 +33,9 @@ const Login: NextPage = () => {
           <p>
             hi {session.user?.name}
           </p>
-          <button onClick={() => { createTeam() }}>Create Team</button>
+          <button onClick={() => { createTeam() }}>Create Team</button><br />
           <button onClick={() => signOut()}>Logout</button>
+          
         </div>
       ) : (
         <div>

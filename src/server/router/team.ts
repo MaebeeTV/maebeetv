@@ -46,7 +46,7 @@ export const teamRouter = createRouter()
     }
   },
 })
-.query("get_teams", {
+.query("get_all", {
   async resolve({ ctx }) {
     if (!ctx.session?.user) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
