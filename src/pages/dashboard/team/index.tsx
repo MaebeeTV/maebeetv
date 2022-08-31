@@ -45,19 +45,20 @@ const TeamsPage: NextPageWithLayout = () => {
             <div className="flex-1 m-6 relative">
                 <Dialog className="p-3 absolute top-0 left-0 flex items-center justify-center w-full h-full" open={newTeamOpen} onClose={() => setNewTeamOpen(false)}>
                     <Dialog.Panel>
-                        <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-black bg-white">
-                            <Dialog.Description>
-                                This will permanently deactivate your account
-                            </Dialog.Description>
+                        <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
+                            <form
+                                onSubmit={(event) => {
+                                    event.preventDefault();
+                                    const { name, description } = event.target as any;
+                                    createTeam.mutate({ name: name.value, description: description.value })
+                                }}
+                            >
+                                <input name="name" className="w-full my-2 p-3 border-none" placeholder="Name" />
+                                <textarea name="description" className="w-full my-2 p-3" placeholder="Description" />
 
-                            <p>
-                                Are you sure you want to deactivate your account? All of your data
-                                will be permanently removed. This action cannot be undone.
-                            </p>
-                            <div className="mt-3 flex gap-3">
-                                <Button onClick={() => setNewTeamOpen(false)}>Deactivate</Button>
-                                <Button onClick={() => setNewTeamOpen(false)}>Cancel</Button>
-                            </div>
+                                <Button type="submit" className="my-2 mr-3">Create</Button>
+                                <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>
+                            </form>
                         </Card>
                     </Dialog.Panel>
                 </Dialog>
