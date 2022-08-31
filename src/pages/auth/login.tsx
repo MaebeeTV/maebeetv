@@ -26,8 +26,8 @@ const Login: NextPage = () => {
           <a href="#">
               <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Login</h1>
           </a>
-          <button onClick={() => signIn("discord")} className="inline-flex items-center py-2 px-6 text-sm font-medium text-center text-black focus:ring-4 focus:outline-none bg-[#FF9DD0]">
-          Login with Discord
+          <button onClick={() => signIn("discord", { callbackUrl: `${location.origin}/dashboard` })} className="inline-flex items-center py-2 px-6 text-sm font-medium text-center text-black focus:ring-4 focus:outline-none bg-[#FF9DD0]">
+            Login with Discord
           </button>
       </div>
     </div>
