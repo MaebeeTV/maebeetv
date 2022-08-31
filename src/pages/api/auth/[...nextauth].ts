@@ -12,7 +12,7 @@ import { User } from "@prisma/client";
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    async signIn({ account }) {
+    async signIn({ account, profile, user }) {
       if (account.provider === "discord" && process.env.DISCORD_ALLOWED_GUILD) {
         const guilds: {id: string}[] = (await axios.get("https://discord.com/api/users/@me/guilds", 
           {
@@ -22,6 +22,19 @@ export const authOptions: NextAuthOptions = {
           }
         )).data;
         const guild_ids = guilds.flatMap(e => e.id);
+
+        try {
+          await prisma.user.update({
+            where: {
+              id: user.id
+            },
+            data: {
+              discordName: getDiscordName(profile)
+            }
+          })
+        }
+        catch {}
+
         return guild_ids.includes(process.env.DISCORD_ALLOWED_GUILD);
       }
       return false;
@@ -52,7 +65,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: profile.id,
           name: profile.username,
-          discordName: `${profile.username}#${profile.discriminator}`,
+          discordName: getDiscordName(profile),
           email: profile.email,
           image: profile.image_url,
         } as User
@@ -61,5 +74,9 @@ export const authOptions: NextAuthOptions = {
     // ...add more providers here
   ],
 };
+
+function getDiscordName(profile: any) {
+  return `${profile.username}#${profile.discriminator}`;
+}
 
 export default NextAuth(authOptions);
