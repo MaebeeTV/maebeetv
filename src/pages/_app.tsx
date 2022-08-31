@@ -8,16 +8,17 @@ import superjson from "superjson";
 import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 
-import Navbar from "components/Navbar";
 import { ThemeProvider } from 'next-themes'
+import MainLayout from "layouts/main";
+import { NextPageWithLayout } from "next";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  const getLayout = (Component as typeof Component & NextPageWithLayout).getLayout ?? ((page) => <MainLayout>{page}</MainLayout>)
+
   return (
     <SessionProvider>
       <ThemeProvider attribute="class">
-
-        <Navbar />
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </SessionProvider>
   );
