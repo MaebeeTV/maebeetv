@@ -42,7 +42,7 @@ const Dashboard: NextPageWithLayout = () => {
                 {
                     messages.map(e => 
                         (
-                            <Card key={e.id} title={e.name} className="w-96 flex-1 md:flex-none min-w-max">
+                            <Card key={e.id} title={e.name} className="w-full flex-1 md:flex-none min-w-max">
                                 {e.description}
                             </Card>
                         )
