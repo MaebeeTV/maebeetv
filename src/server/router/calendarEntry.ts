@@ -36,19 +36,18 @@ export const calendarEntryRouter = createRouter()
     }
 
     try {
-      const teamIds = (await ctx.prisma.usersOnTeam.findMany({
+      const entryIds = (await ctx.prisma.usersReceivedCalendarEntry.findMany({
         where: {
           userId: ctx.session.user.id
         }
-      })).map(e => e.teamId);
-      await ctx.prisma.team.findMany({
+      })).map(e => e.calendarEntryId);
+      return await ctx.prisma.team.findMany({
         where: {
-          id: { in: teamIds }
+          id: { in: entryIds }
         }
       })
     } catch (error) {
       console.log("error", error);
     }
-    return
   }
 });

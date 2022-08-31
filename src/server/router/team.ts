@@ -58,7 +58,7 @@ export const teamRouter = createRouter()
           userId: ctx.session.user.id
         }
       })).map(e => e.teamId);
-      await ctx.prisma.team.findMany({
+      return await ctx.prisma.team.findMany({
         where: {
           id: { in: teamIds }
         }
@@ -66,6 +66,5 @@ export const teamRouter = createRouter()
     } catch (error) {
       console.log("error", error);
     }
-    return
   }
 });
