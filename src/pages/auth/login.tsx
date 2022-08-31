@@ -1,11 +1,18 @@
+import Spinner from "components/Spinner";
 import { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 const Login: NextPage = () => {
-    const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <main>Loading...</main>;
+    return (
+      <div className="flex-1 flex justify-center items-center">
+        <div>
+          <Spinner className="h-16 w-16" />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -16,7 +23,7 @@ const Login: NextPage = () => {
           <p>
             hi {session.user?.name}
           </p>
-
+          <button onClick={() => { undefined }}>Create Team</button>
           <button onClick={() => signOut()}>Logout</button>
         </div>
       ) : (
