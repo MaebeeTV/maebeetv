@@ -25,4 +25,28 @@ export const roleRouter = createRouter()
       console.log(error);
     }
   },
+})
+.query("get_all_in_teams", {
+  input: z.object({
+    teamId: z.string().or(z.string().array())
+  }),
+  async resolve({ ctx, input }) {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    if (!Array.isArray(input.teamId)) input.teamId = [input.teamId];
+
+    try {
+      return await ctx.prisma.role.findMany({
+        where: {
+          teamId: {
+            in: input.teamId
+          }
+        }
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 });
