@@ -85,7 +85,7 @@ const TeamsPage: NextPageWithLayout = () => {
     )
 }
 
-TeamsPage.getLayout = (page: ReactElement) => {
+TeamsPage.getLayout = (page) => {
     return (
         <DashboardLayout>
             {page}
