@@ -5,7 +5,7 @@ import { createRouter } from "./context";
 export const teamRouter = createRouter()
 .mutation("create", {
   input: z.object({
-    id: z.optional(z.string()),
+    teamId: z.string(),
     name: z.string(),
     description: z.optional(z.string()),
   }),
@@ -13,34 +13,14 @@ export const teamRouter = createRouter()
     if (!ctx.session?.user) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
-    
     try {
-      const team = await ctx.prisma.team.create({
+      return await ctx.prisma.role.create({
         data: {
           name: input.name,
-          description: input.description
+          description: input.description,
+          teamId: input.teamId,
         },
-      });
-      await ctx.prisma.usersOnTeam.create({
-        data: {
-          userId: ctx.session.user.id,
-          teamId: team.id
-        }
-      });
-      const role = await ctx.prisma.role.create({
-        data: {
-          name: "Creator",
-          description: "Creator of the Team",
-          teamId: team.id
-        }
-      });
-      await ctx.prisma.usersWithRole.create({
-        data: {
-          userId: ctx.session.user.id,
-          roleId: role.id,
-        }
-      });
-      return team;
+      })
     } catch (error) {
       console.log(error);
     }
