@@ -39,11 +39,11 @@ export const authOptions: NextAuthOptions = {
       }
       return false;
     },
-    async session({ session, user, }) {
+    async session({ session, user }) {
       if (session.user) {
-        session.user
-        session.user.id = user.id;
+        Object.assign(session.user, user)
       }
+      
       return session;
     },
   },

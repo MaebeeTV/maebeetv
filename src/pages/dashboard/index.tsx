@@ -25,7 +25,7 @@ const Dashboard: NextPageWithLayout = () => {
         }
     });
 
-    if (isLoading || status === "loading" || !messages) {
+    if (isLoading || !messages || status === "loading" || !session) {
         return (
           <div className="flex-1 flex justify-center items-center">
             <div>
@@ -34,7 +34,7 @@ const Dashboard: NextPageWithLayout = () => {
           </div>
         );
     }
-    console.log(session?.user)
+    console.log(session.user)
     return (
         <div className="flex-1 m-6 relative">
             <div className="absolute top-0 left-0">
