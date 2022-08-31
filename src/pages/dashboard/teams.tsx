@@ -8,7 +8,7 @@ import Button from "components/Button";
 import Card from "components/Card";
 import { useSession } from "next-auth/react";
 
-const Dashboard: NextPageWithLayout = () => {
+const TeamsPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
     const { data: session, status } = useSession();
     const { data: messages, isLoading } = trpc.useQuery(["team.get_all"]);
@@ -58,7 +58,7 @@ const Dashboard: NextPageWithLayout = () => {
     )
 }
 
-Dashboard.getLayout = (page: ReactElement) => {
+TeamsPage.getLayout = (page: ReactElement) => {
     return (
         <DashboardLayout>
             {page}
@@ -66,4 +66,4 @@ Dashboard.getLayout = (page: ReactElement) => {
     )
 };
 
-export default Dashboard;
+export default TeamsPage;
