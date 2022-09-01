@@ -53,6 +53,7 @@ const TeamsPage: NextPageWithLayout = () => {
                                     );
                                     console.log(value_map);
                                     createTeam.mutate(value_map);
+                                    setNewTeamOpen(false);
                                 }}
                             >
                                 <input name="name" className="w-full my-2 p-3 border-none" placeholder="Name" />
