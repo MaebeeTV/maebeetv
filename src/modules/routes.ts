@@ -17,7 +17,8 @@ export const routes: Route[] = [
         navbar_options: {
             bg_color: "[#0084FF]",
             text_color: "white"
-        }
+        },
+        folder: "Projects"        
     },
     {
         name: "MaebeeTV Asks",
@@ -27,7 +28,8 @@ export const routes: Route[] = [
         navbar_options: {
             bg_color: "transparent",
             text_color: "white"
-        }
+        },
+        folder: "Projects"
     }
 ]
 
@@ -37,6 +39,8 @@ export interface Route {
     show_in_nav?: boolean
 
     navbar_options?: NavbarOptions
+
+    folder?: string
 }
 
 export interface NavbarOptions {

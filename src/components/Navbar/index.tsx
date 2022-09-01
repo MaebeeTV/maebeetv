@@ -10,6 +10,7 @@ import Head from "next/head";
 import { useSession, signOut } from "next-auth/react";
 
 import styles from 'styles/Navbar.module.css'
+import { Menu } from "@headlessui/react";
 
 const Navbar: FC = () => {
     const [navbar, setNavbar] = useState(false);
@@ -23,8 +24,12 @@ const Navbar: FC = () => {
 
     const navbar_options = found_route?.navbar_options;
 
+    const bg_color = `bg-${navbar_options?.bg_color ? navbar_options.bg_color : "[#FF9DD0]"}`
+
+    let folders = routes.map(e => e.folder as NonNullable<typeof e.folder>).filter(Boolean);
+
     return (
-        <header className={`bg-${navbar_options?.bg_color ? navbar_options.bg_color : "[#FF9DD0]"} sticky top-0 z-50 md:mt-0 text-${ navbar_options?.text_color ? navbar_options.text_color : "black" }`}>
+        <header className={`${bg_color} sticky top-0 z-50 md:mt-0 text-${ navbar_options?.text_color ? navbar_options.text_color : "black" }`}>
             <Head>
                 <title>{title}</title>
                 <meta property="og:title" content={title} />
@@ -53,15 +58,46 @@ const Navbar: FC = () => {
                         {
                             routes.map((e) => {
                                 if (e.show_in_nav) {
-                                    return (
-                                        <li key={e.path} className={`${styles.navbar_button} ${e.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
-                                            <Link href={e.path}>
-                                                <a onClick={() => { setNavbar(!navbar) }}>
-                                                    {e.name}
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    )
+                                    if (e.folder) {
+                                        if (!folders.includes(e.folder)) return <></>;
+                                        folders = folders.filter(folder => folder !== e.folder)
+                                        
+                                        const folder_routes = routes.filter(e => e.folder);
+
+                                        return (
+                                            <Menu as="li" key={e.folder} className="relative">
+                                                <div className="flex-1 flex items-stretch flex-wrap md:flex-nowrap">
+                                                    <Menu.Button className={styles.navbar_button}>
+                                                        <span className={styles.navbar_button_button}>{e.folder}</span>
+                                                    </Menu.Button>
+                                                    <Menu.Items className="md:absolute md:mt-12 right-0  min-w-full">
+                                                        {folder_routes.map(folder_route => (
+                                                            <Menu.Item key={folder_route.path} as="div" className={styles.navbar_button}>
+                                                                {({ active }) => (
+                                                                    <Link href={folder_route.path}>
+                                                                        <a className={`${bg_color} ${active ? "backdrop-brightness-90" : ""}`} onClick={() => { setNavbar(!navbar) }}>
+                                                                            {folder_route.name}
+                                                                        </a>
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+                                                        ))}
+                                                    </Menu.Items>
+                                                </div>
+                                            </Menu>
+                                        )
+                                    }
+                                    else {
+                                        return (
+                                            <li key={e.path} className={`${styles.navbar_button} ${e.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
+                                                <Link href={e.path}>
+                                                    <a onClick={() => { setNavbar(!navbar) }}>
+                                                        {e.name}
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        )
+                                    }
                                 }
                             })
                         }
