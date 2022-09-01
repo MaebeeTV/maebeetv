@@ -53,7 +53,22 @@ const CalendarPage: NextPageWithLayout = () => {
                     }
                 </div>
                 <div className="my-16 flex justify-center gap-6 flex-wrap">
-                    <Calendar className={`${CalendarStyles["react-calendar"]} flex-1`}></Calendar>
+                    <Calendar 
+                        tileContent= { 
+                            ({ date }) => {
+                                if (data && data.map(e => e.endsAt).includes(date)) {
+                                    return (
+                                        <div className="absolute top-0 left-0 h-full w-full bg-purple-300 -z-50"></div>
+                                    )
+                                }
+                                return <></>
+                            }
+                        } 
+                        className={`${CalendarStyles["react-calendar"]} flex-1`}
+                    >
+                        
+                    </Calendar>
+                    
                 </div>
             </div>
         </>
