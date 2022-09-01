@@ -31,7 +31,7 @@ export const calendarEntryRouter = createRouter()
     })
     .query("get_all", {
         async resolve({ ctx }) {
-            if (!ctx.session?.user) {
+            if (!ctx.session?.user && ctx.session?.user?.clearance !== "User") {
                 throw new TRPCError({ code: "UNAUTHORIZED" });
             }
 
