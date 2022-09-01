@@ -41,7 +41,7 @@ export const calendarEntryRouter = createRouter()
                         userId: ctx.session.user.id
                     }
                 })).map(e => e.calendarEntryId);
-                return await ctx.prisma.team.findMany({
+                return await ctx.prisma.calendarEntry.findMany({
                     where: {
                         id: { in: entryIds }
                     }
