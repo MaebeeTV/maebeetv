@@ -20,6 +20,7 @@ const CalendarPage: NextPageWithLayout = () => {
     const { data: messages } = trpc.useQuery(["team.get_all"]);
     
     const { data, isLoading } = trpc.useQuery(["calendarEntry.get_all"]);
+    const date_strings = data ? data.map(e => e.endsAt.toDateString()) : undefined;
 
     const deleteTeam = trpc.useMutation("team.delete", OptimisticRefreshDefault(ctx, ["calendarEntry.get_all"]) as any);
 
@@ -56,7 +57,9 @@ const CalendarPage: NextPageWithLayout = () => {
                     <Calendar 
                         tileContent= { 
                             ({ date }) => {
-                                if (data && data.map(e => e.endsAt).includes(date)) {
+                                console.log(data)
+                                if (date_strings?.includes(date.toDateString())) {
+                                    
                                     return (
                                         <div className="absolute top-0 left-0 h-full w-full bg-purple-300 -z-50"></div>
                                     )
