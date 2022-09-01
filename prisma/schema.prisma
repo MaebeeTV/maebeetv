@@ -101,6 +101,8 @@ model Team {
 
   roles     Role[]
   createdAt DateTime @default(now())
+
+  teamsWithCalendarEntry TeamWithCalendarEntry[]
 }
 
 // Roles
@@ -117,11 +119,12 @@ model Role {
   name        String
   description String?
 
-  clearance Clearance @default(User)
-
   teamId        String          @db.ObjectId
   team          Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
   usersWithRole UsersWithRole[]
+  
+  clearance Clearance @default(User)
+  rolesWithCalendarEntry RoleWithCalendarEntry[]
 }
 
 // Calendar Stuff
@@ -129,6 +132,22 @@ model UsersReceivedCalendarEntry {
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
   userId          String        @db.ObjectId
   user            User          @relation(fields: [userId], references: [id])
+  calendarEntryId String        @db.ObjectId
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
+}
+
+model TeamWithCalendarEntry {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  teamId          String        @db.ObjectId
+  team            Team          @relation(fields: [teamId], references: [id])
+  calendarEntryId String        @db.ObjectId
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
+}
+
+model RoleWithCalendarEntry {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  roleId          String        @db.ObjectId
+  role            Role          @relation(fields: [roleId], references: [id])
   calendarEntryId String        @db.ObjectId
   calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
 }
@@ -144,4 +163,6 @@ model CalendarEntry {
   author       User   @relation("authoredCalendarEntries", fields: [authorUserId], references: [id])
 
   usersReceivedCalendarEntry UsersReceivedCalendarEntry[]
+  teamsWithCalendarEntry TeamWithCalendarEntry[]
+  rolesWithCalendarEntry RoleWithCalendarEntry[]
 }
