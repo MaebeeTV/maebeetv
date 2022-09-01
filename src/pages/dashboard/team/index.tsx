@@ -9,34 +9,14 @@ import Card from "components/Card";
 import { useSession } from "next-auth/react";
 import { Dialog } from "@headlessui/react";
 
+import { OptimisticRefreshDefault } from "modules/trpc-helper";
+
 const TeamsPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
     const { data: session, status } = useSession();
     const { data: messages, isLoading } = trpc.useQuery(["team.get_all"]);
-    const createTeam = trpc.useMutation("team.create", {
-        onMutate: () => {
-            ctx.cancelQuery(["team.get_all"])
-            const optimisticUpdate = ctx.getQueryData(["team.get_all"]);
-            if (optimisticUpdate) {
-                ctx.setQueryData(["team.get_all"], optimisticUpdate);
-            }
-        },
-        onSettled: () => {
-            ctx.invalidateQueries(["team.get_all"]);
-        }
-    });
-    const deleteTeam = trpc.useMutation("team.delete", {
-        onMutate: () => {
-            ctx.cancelQuery(["team.get_all"])
-            const optimisticUpdate = ctx.getQueryData(["team.get_all"]);
-            if (optimisticUpdate) {
-                ctx.setQueryData(["team.get_all"], optimisticUpdate);
-            }
-        },
-        onSettled: () => {
-            ctx.invalidateQueries(["team.get_all"]);
-        }
-    });
+    const createTeam = trpc.useMutation("team.create", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
+    const deleteTeam = trpc.useMutation("team.delete", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
 
     const [newTeamOpen, setNewTeamOpen] = useState(false);
 
@@ -93,13 +73,13 @@ const TeamsPage: NextPageWithLayout = () => {
                 <div className="my-16 flex justify-center gap-6 flex-wrap">
                     {
                         messages.map(e =>
-                        (
-                            <Card key={e.id} title={e.name} className="w-full flex-1 md:flex-none min-w-max">
-                                {e.description}<br/>
-                                <Button onClick={() => deleteTeam.mutate({ id: e.id })} className="mr-3 mt-2">Delete</Button>
-                                <Button className="mt-2">View</Button>
-                            </Card>
-                        )
+                            (
+                                <Card key={e.id} title={e.name} className="w-full flex-1 md:flex-none min-w-max">
+                                    {e.description}<br/>
+                                    <Button onClick={() => deleteTeam.mutate({ id: e.id })} className="mr-3 mt-2">Delete</Button>
+                                    <Button className="mt-2">View</Button>
+                                </Card>
+                            )
                         )
                     }
                 </div>
