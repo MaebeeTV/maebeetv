@@ -131,17 +131,17 @@ model Role {
 model UsersReceivedCalendarEntry {
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
   userId          String        @db.ObjectId
-  user            User          @relation(fields: [userId], references: [id])
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   calendarEntryId String        @db.ObjectId
-  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id], onDelete: Cascade)
 }
 
 model TeamWithCalendarEntry {
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
   teamId          String        @db.ObjectId
-  team            Team          @relation(fields: [teamId], references: [id])
+  team            Team          @relation(fields: [teamId], references: [id], onDelete: Cascade)
   calendarEntryId String        @db.ObjectId
-  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id], onDelete: Cascade)
 }
 
 model RoleWithCalendarEntry {
@@ -149,7 +149,7 @@ model RoleWithCalendarEntry {
   roleId          String        @db.ObjectId
   role            Role          @relation(fields: [roleId], references: [id])
   calendarEntryId String        @db.ObjectId
-  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id])
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id], onDelete: Cascade)
 }
 
 model CalendarEntry {
