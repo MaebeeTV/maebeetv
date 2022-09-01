@@ -15,8 +15,8 @@ const Home: NextPage = () => {
                         <Image src="/img/MaebeeTV-logos.png" width="360" height="360" alt="MaebeeTV Logo" />
                     </div>
                     <div className="flex flex-col gap-3">
-                        <div className="text-3xl md:text-4xl text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
-                        <div className="text-xl md:text-2xl">We are a movie production company that strives to change the way stories are told.</div>
+                        <div className="text-4em md:text-4em text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
+                        <div className="text-1em md:text-2em">We are a movie production company that strives to change the way stories are told.</div>
                     </div>
                 </div>
 
