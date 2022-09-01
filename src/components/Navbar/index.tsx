@@ -25,11 +25,12 @@ const Navbar: FC = () => {
     const navbar_options = found_route?.navbar_options;
 
     const bg_color = `bg-${navbar_options?.bg_color ? navbar_options.bg_color : "[#FF9DD0]"}`
+    const text_color = navbar_options?.text_color ? navbar_options.text_color : "black"
 
     let folders = routes.map(e => e.folder as NonNullable<typeof e.folder>).filter(Boolean);
 
     return (
-        <header className={`${bg_color} sticky top-0 z-50 md:mt-0 text-${ navbar_options?.text_color ? navbar_options.text_color : "black" }`}>
+        <header className={`${bg_color} sticky top-0 z-50 md:mt-0 text-${text_color}`}>
             <Head>
                 <title>{title}</title>
                 <meta property="og:title" content={title} />
@@ -70,16 +71,14 @@ const Navbar: FC = () => {
                                                     <Menu.Button className={styles.navbar_button}>
                                                         <span className={styles.navbar_button_button}>{e.folder}</span>
                                                     </Menu.Button>
-                                                    <Menu.Items className="md:absolute md:mt-12 right-0  min-w-full">
+                                                    <Menu.Items className={`md:absolute md:mt-12 right-0 min-w-full ${bg_color}`}>
                                                         {folder_routes.map(folder_route => (
                                                             <Menu.Item key={folder_route.path} as="div" className={styles.navbar_button}>
-                                                                {({ active }) => (
-                                                                    <Link href={folder_route.path}>
-                                                                        <a className={`${bg_color} ${active ? "backdrop-brightness-90" : ""}`} onClick={() => { setNavbar(!navbar) }}>
-                                                                            {folder_route.name}
-                                                                        </a>
-                                                                    </Link>
-                                                                )}
+                                                                <Link href={folder_route.path}>
+                                                                    <a className="" onClick={() => { setNavbar(!navbar) }}>
+                                                                        {folder_route.name}
+                                                                    </a>
+                                                                </Link>
                                                             </Menu.Item>
                                                         ))}
                                                     </Menu.Items>
