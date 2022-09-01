@@ -1,5 +1,5 @@
 import DashboardLayout from "layout/dashboard";
-import { NextPage, NextPageWithLayout } from "next";
+import { NextPageWithLayout } from "next";
 
 const TeamInfoPage: NextPageWithLayout = () => {
     return <></>
