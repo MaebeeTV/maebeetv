@@ -31,7 +31,8 @@ export const teamRouter = createRouter()
         data: {
           name: "Creator",
           description: "Creator of the Team",
-          teamId: team.id
+          teamId: team.id,
+          clearance: "Admin"
         }
       });
       await ctx.prisma.usersWithRole.create({
@@ -41,6 +42,40 @@ export const teamRouter = createRouter()
         }
       });
       return team;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+})
+.mutation("delete", {
+  input: z.object({
+    id: z.optional(z.string())
+  }),
+  async resolve({ ctx, input }) {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    
+    try {
+      const adminRoleIdsOnTeam = (await ctx.prisma.role.findMany({
+        where: {
+          clearance: "Admin",
+          teamId: input.id
+        }
+      })).map(e => e.id)
+      const allowedUserWithRole = await ctx.prisma.usersWithRole.findFirst({
+        where: {
+          userId: ctx.session.user.id,
+          roleId: { in: adminRoleIdsOnTeam }
+        }
+      })
+      if (allowedUserWithRole) {
+        return await ctx.prisma.team.delete({
+          where: {
+            id: input.id
+          }
+        })
+      }
     } catch (error) {
       console.log(error);
     }
