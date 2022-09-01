@@ -1,4 +1,4 @@
-import { routes } from "modules/routes";
+import { Route, routes as impted_routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useState } from "react";
@@ -12,7 +12,13 @@ import { useSession, signOut } from "next-auth/react";
 import styles from 'styles/Navbar.module.css'
 import { Menu } from "@headlessui/react";
 
-const Navbar: FC = () => {
+export interface NavbarProps {
+    routes?: Route[]
+}
+
+const Navbar: FC<NavbarProps> = (props) => {
+    const routes = props.routes ? props.routes : impted_routes;
+
     const [navbar, setNavbar] = useState(false);
     const router = useRouter();
 
