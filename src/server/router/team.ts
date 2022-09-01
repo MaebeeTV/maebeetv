@@ -8,6 +8,7 @@ export const teamRouter = createRouter()
             id: z.optional(z.string()),
             name: z.string(),
             description: z.optional(z.string()),
+            memberUserIds: z.optional(z.string().array())
         }),
         async resolve({ ctx, input }) {
             if (!ctx.session?.user || ctx.session.user.clearance === "User") {
@@ -21,11 +22,20 @@ export const teamRouter = createRouter()
                         description: input.description
                     },
                 });
-                await ctx.prisma.usersOnTeam.create({
-                    data: {
-                        userId: ctx.session.user.id,
-                        teamId: team.id
-                    }
+                let userIdsAddedToTeam = [{ userId: ctx.session.user.id, teamId: team.id }]
+                if (input.memberUserIds && input.memberUserIds.length !== 0) {
+                    userIdsAddedToTeam = userIdsAddedToTeam.concat(
+                        (
+                            await ctx.prisma.user.findMany({
+                                where: {
+                                    id: { in: input.memberUserIds }
+                                }
+                            })
+                        ).map(e => { return { userId: e.id, teamId: team.id } })
+                    );
+                }
+                await ctx.prisma.usersOnTeam.createMany({
+                    data: userIdsAddedToTeam
                 });
                 const role = await ctx.prisma.role.create({
                     data: {
