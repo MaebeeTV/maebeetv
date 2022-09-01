@@ -17,10 +17,9 @@ import CalendarStyles from "styles/Calendar.module.css";
 const CalendarPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
     const { data: session, status } = useSession();
-    const { data: messages } = trpc.useQuery(["team.get_all"]);
     
-    const { data, isLoading } = trpc.useQuery(["calendarEntry.get_all"]);
-    const date_strings = data ? data.map(e => e.endsAt.toDateString()) : undefined;
+    const { data: entries, isLoading } = trpc.useQuery(["calendarEntry.get_all"]);
+    const date_strings = entries ? entries.map(e => e.endsAt.toDateString()) : undefined;
 
     const [newEntryOpen, setNewEntryOpen] = useState(false);
 
@@ -55,7 +54,6 @@ const CalendarPage: NextPageWithLayout = () => {
                     <Calendar 
                         tileContent= { 
                             ({ date }) => {
-                                console.log(data)
                                 if (date_strings?.includes(date.toDateString())) {
                                     
                                     return (
