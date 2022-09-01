@@ -59,7 +59,7 @@ model User {
 
   usersWithRole UsersWithRole[]
 
-  authoredCalendarEntries CalendarEntry[] @relation("authoredCalendarEntries")
+  authoredCalendarEntries CalendarEntry[]
 
   receivedCalendarEntries UsersReceivedCalendarEntry[]
 
@@ -160,7 +160,7 @@ model CalendarEntry {
   description String?
 
   authorUserId String
-  author       User   @relation("authoredCalendarEntries", fields: [authorUserId], references: [id])
+  author       User   @relation(fields: [authorUserId], references: [id])
 
   usersReceivedCalendarEntry UsersReceivedCalendarEntry[]
   teamsWithCalendarEntry TeamWithCalendarEntry[]
