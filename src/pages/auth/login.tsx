@@ -25,9 +25,9 @@ const Login: NextPage = () => {
   return (
     <div className="flex-1 flex justify-center items-center">
       <Card title="Login">
-          <Button onClick={() => signIn("discord", { callbackUrl: `${location.origin}/dashboard` })} className="mt-4 px-12">
-            Login with Discord
-          </Button>
+        <Button onClick={() => signIn("discord", { callbackUrl: `${location.origin}/dashboard` })} className="mt-4 px-12">
+          Login with Discord
+        </Button>
       </Card>
     </div>
   );

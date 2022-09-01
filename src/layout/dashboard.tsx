@@ -6,11 +6,11 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
-    return (
-        <>
-            <Navbar />
-            {children}
-        </>
-    );
+  return (
+    <>
+      <Navbar />
+      {children}
+    </>
+  );
 }
 export default DashboardLayout;

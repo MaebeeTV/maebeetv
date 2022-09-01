@@ -2,15 +2,15 @@ import DashboardLayout from "layout/dashboard";
 import { NextPage, NextPageWithLayout } from "next";
 
 const TeamInfoPage: NextPageWithLayout = () => {
-    return <></>
+  return <></>
 }
 
 TeamInfoPage.getLayout = (page) => {
-    return (
-        <DashboardLayout>
-            {page}
-        </DashboardLayout>
-    )
+  return (
+    <DashboardLayout>
+      {page}
+    </DashboardLayout>
+  )
 };
 
 

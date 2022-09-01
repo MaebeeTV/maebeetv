@@ -12,7 +12,7 @@ const Home: NextPage = () => {
       <div className="flex flex-col gap-12 items-center mx-6">
         <div className="flex gap-6 items-center justify-center flex-wrap text-center min-h-[75vh]">
           <div className="m-3">
-          <Image src="/img/MaebeeTV-logos.png" width="360" height="360" alt="MaebeeTV Logo" />
+            <Image src="/img/MaebeeTV-logos.png" width="360" height="360" alt="MaebeeTV Logo" />
           </div>
           <div className="flex flex-col gap-3">
             <div className="text-3xl md:text-4xl text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
