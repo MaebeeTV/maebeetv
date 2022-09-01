@@ -122,8 +122,8 @@ model Role {
   teamId        String          @db.ObjectId
   team          Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
   usersWithRole UsersWithRole[]
-  
-  clearance Clearance @default(User)
+
+  clearance              Clearance               @default(User)
   rolesWithCalendarEntry RoleWithCalendarEntry[]
 }
 
@@ -163,6 +163,6 @@ model CalendarEntry {
   author       User   @relation(fields: [authorUserId], references: [id])
 
   usersReceivedCalendarEntry UsersReceivedCalendarEntry[]
-  teamsWithCalendarEntry TeamWithCalendarEntry[]
-  rolesWithCalendarEntry RoleWithCalendarEntry[]
+  teamsWithCalendarEntry     TeamWithCalendarEntry[]
+  rolesWithCalendarEntry     RoleWithCalendarEntry[]
 }
