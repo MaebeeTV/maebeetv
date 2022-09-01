@@ -1,0 +1,17 @@
+.react-calendar {
+    @apply text-center text-lg
+}
+
+.react-calendar :global .react-calendar__navigation {
+    @apply p-3 text-2xl
+}
+.react-calendar :global .react-calendar__navigation button {
+    @apply px-3
+}
+
+.react-calendar :global .react-calendar__tile {
+    @apply p-3
+}
+.react-calendar :global .react-calendar__tile--now {
+    @apply bg-[#FF9DD0]
+}
