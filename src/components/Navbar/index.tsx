@@ -2,7 +2,7 @@ import { Route, routes as impted_routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useState } from "react";
-import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
 import Head from "next/head";
@@ -114,11 +114,21 @@ const Navbar: FC<NavbarProps> = (props) => {
                         {
                             session ? (
                                 <li className={styles.navbar_button}>
-                                    <button className="mx-3 my-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { signOut({ callbackUrl: location.origin }) }}>
+                                    <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { signOut({ callbackUrl: location.origin }) }}>
                                         <ArrowLeftOnRectangleIcon height="32px" />
                                     </button>
                                 </li>
-                            ) : (<></>)
+                            ) : (
+                                <li className={styles.navbar_button}>
+                                    <div>
+                                        <Link href="/auth/login">
+                                            <a onClick={() => { setNavbar(!navbar) }} className="px-3 py-1 flex h-full justify-center items-center">
+                                                <ArrowRightOnRectangleIcon height="32px" />
+                                            </a>
+                                        </Link>
+                                    </div>
+                                </li>
+                            )
                         }
                     </ul>
                 </div>
