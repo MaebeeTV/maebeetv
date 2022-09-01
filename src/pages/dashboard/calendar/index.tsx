@@ -22,9 +22,7 @@ const CalendarPage: NextPageWithLayout = () => {
     const { data, isLoading } = trpc.useQuery(["calendarEntry.get_all"]);
     const date_strings = data ? data.map(e => e.endsAt.toDateString()) : undefined;
 
-    const deleteTeam = trpc.useMutation("team.delete", OptimisticRefreshDefault(ctx, ["calendarEntry.get_all"]) as any);
-
-    const [newTeamOpen, setNewTeamOpen] = useState(false);
+    const [newEntryOpen, setNewEntryOpen] = useState(false);
 
     if (isLoading || !messages || status === "loading" || !session) {
         return (
@@ -39,7 +37,7 @@ const CalendarPage: NextPageWithLayout = () => {
     return (
         <>
             <div className="flex-1 m-6 relative">
-                <Dialog className="p-3 absolute top-0 left-0 flex items-center justify-center w-full h-full" open={newTeamOpen} onClose={() => setNewTeamOpen(false)}>
+                <Dialog className="p-3 absolute top-0 left-0 flex items-center justify-center w-full h-full" open={newEntryOpen} onClose={() => setNewEntryOpen(false)}>
                     <Dialog.Panel>
                         <Card title="Create Calendar Entry" className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
                             
@@ -49,7 +47,7 @@ const CalendarPage: NextPageWithLayout = () => {
 
                 <div className="absolute top-0 left-0">
                     {session?.user?.clearance !== "User" ?
-                        <Button onClick={() => setNewTeamOpen(true)}>Create Calendar Entry</Button>
+                        <Button onClick={() => setNewEntryOpen(true)}>Create Calendar Entry</Button>
                         : <></>
                     }
                 </div>
@@ -68,10 +66,7 @@ const CalendarPage: NextPageWithLayout = () => {
                             }
                         } 
                         className={`${CalendarStyles["react-calendar"]} flex-1`}
-                    >
-                        
-                    </Calendar>
-                    
+                    />                    
                 </div>
             </div>
         </>
