@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { Dialog } from "@headlessui/react";
 
 import { OptimisticRefreshDefault } from "modules/trpc-helper";
+import Link from "next/link";
 
 const TeamsPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
@@ -77,7 +78,11 @@ const TeamsPage: NextPageWithLayout = () => {
                                 <Card key={e.id} title={e.name} className="w-full flex-1 md:flex-none min-w-max">
                                     {e.description}<br/>
                                     <Button onClick={() => deleteTeam.mutate({ id: e.id })} className="mr-3 mt-2">Delete</Button>
-                                    <Button className="mt-2">View</Button>
+                                    <Button className="mt-2">
+                                        <Link href={`/dashboard/team/${e.id}`}>
+                                            <a>View</a>
+                                        </Link>
+                                    </Button>
                                 </Card>
                             )
                         )
