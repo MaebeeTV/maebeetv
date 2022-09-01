@@ -37,7 +37,7 @@ const TeamsPage: NextPageWithLayout = () => {
             </div>
         );
     }
-    console.log(session.user)
+
     return (
         <>
 
