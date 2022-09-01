@@ -60,8 +60,8 @@ model User {
   usersWithRole UsersWithRole[]
 
   authoredCalendarEntries CalendarEntry[]
-
   receivedCalendarEntries UsersReceivedCalendarEntry[]
+  usersAttendedCalendarEntry UsersAttendedCalendarEntry[]
 
   clearance Clearance @default(User)
 }
@@ -152,6 +152,15 @@ model RoleWithCalendarEntry {
   calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id], onDelete: Cascade)
 }
 
+
+model UsersAttendedCalendarEntry {
+  id              String        @id @default(cuid())
+  userId          String        @default(cuid())
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  calendarEntryId String        @default(cuid())
+  calendarEntry   CalendarEntry @relation(fields: [calendarEntryId], references: [id], onDelete: Cascade)
+}
+
 model CalendarEntry {
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
@@ -165,4 +174,6 @@ model CalendarEntry {
   usersReceivedCalendarEntry UsersReceivedCalendarEntry[]
   teamsWithCalendarEntry     TeamWithCalendarEntry[]
   rolesWithCalendarEntry     RoleWithCalendarEntry[]
+
+  usersAttendedCalendarEntry UsersAttendedCalendarEntry[]
 }
