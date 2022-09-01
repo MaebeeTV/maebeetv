@@ -2,7 +2,7 @@ import { routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useState } from "react";
-import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
 import Head from "next/head";
@@ -69,7 +69,9 @@ const Navbar: FC = () => {
                                             <Menu as="li" key={e.folder} className="relative">
                                                 <div className="flex-1 flex items-stretch flex-wrap md:flex-nowrap">
                                                     <Menu.Button className={styles.navbar_button}>
-                                                        <span className={styles.navbar_button_button}>{e.folder}</span>
+                                                        <span className={styles.navbar_button_button}>
+                                                            {e.folder} <ChevronDownIcon className="ml-1 mt-1" height="18px" />
+                                                        </span>
                                                     </Menu.Button>
                                                     <Menu.Items className={`md:absolute md:mt-12 right-0 min-w-full ${bg_color}`}>
                                                         {folder_routes.map(folder_route => (
