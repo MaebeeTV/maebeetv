@@ -75,8 +75,8 @@ const Navbar: FC = () => {
                                                     </Menu.Button>
                                                     <Menu.Items className={`md:absolute md:mt-12 right-0 min-w-full ${bg_color}`}>
                                                         {folder_routes.map(folder_route => (
-                                                            <Menu.Item key={folder_route.path} as="div" className={styles.navbar_button}>
-                                                                <Link href={folder_route.path}>
+                                                            <Menu.Item key={folder_route.path} as="div" className={`${styles.navbar_button} ${folder_route.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
+                                                                <Link href={folder_route.path} >
                                                                     <a className="" onClick={() => { setNavbar(!navbar) }}>
                                                                         {folder_route.name}
                                                                     </a>
