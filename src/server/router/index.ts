@@ -9,12 +9,12 @@ import { roleRouter } from "./role";
 import { calendarEntryRouter } from "./calendarEntry";
 
 export const appRouter = createRouter()
-  .transformer(superjson)
-  .merge("example.", exampleRouter)
-  .merge("auth.", protectedExampleRouter)
-  .merge("team.", teamRouter)
-  .merge("role.", roleRouter)
-  .merge("calendarEntry.", calendarEntryRouter);
+    .transformer(superjson)
+    .merge("example.", exampleRouter)
+    .merge("auth.", protectedExampleRouter)
+    .merge("team.", teamRouter)
+    .merge("role.", roleRouter)
+    .merge("calendarEntry.", calendarEntryRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

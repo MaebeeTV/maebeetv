@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 
 const About: NextPage = () => {
-  return (
+    return (
     // <div className="flex-1 m-12 flex items-center justify-center">
     //   <div className="p-6 max-w-5xl rounded-lg border border-gray-200 shadow-md dark:border-gray-700">
     //       <a href="#">
@@ -14,21 +14,21 @@ const About: NextPage = () => {
     //       </p>
     //   </div>
     // </div>
-    <div className="flex flex-col items-stretch">
-      <HeroHeader>
-        About Us
-      </HeroHeader>
-      <div className="flex mx-auto px-16 max-w-screen-xl font-semibold md:flex-row flex-col justify-items-stretch items-center m-6 gap-6">
-        <div className="md:w-1/2 text-center">
-          <Image width={562} height={350} src="/img/about/Camera.jpg" alt="camera"></Image>
-        </div>
-        <div className="md:w-1/2">
-          MaebeeTV is a non-profit LGBT-centered cinema production organization founded in 2021 that strives to teach lessons to young and old individuals. It allows everyday people to make their own experiences into movies or short films. We are a close-knit group of people who want to change the world one story at a time. Every story we create the more misinformation is corrected and awareness is spread.
-        </div>
-      </div>
+        <div className="flex flex-col items-stretch">
+            <HeroHeader>
+                About Us
+            </HeroHeader>
+            <div className="flex mx-auto px-16 max-w-screen-xl font-semibold md:flex-row flex-col justify-items-stretch items-center m-6 gap-6">
+                <div className="md:w-1/2 text-center">
+                    <Image width={562} height={350} src="/img/about/Camera.jpg" alt="camera"></Image>
+                </div>
+                <div className="md:w-1/2">
+                    MaebeeTV is a non-profit LGBT-centered cinema production organization founded in 2021 that strives to teach lessons to young and old individuals. It allows everyday people to make their own experiences into movies or short films. We are a close-knit group of people who want to change the world one story at a time. Every story we create the more misinformation is corrected and awareness is spread.
+                </div>
+            </div>
 
-    </div>
-  );
+        </div>
+    );
 };
 
 export default About;
