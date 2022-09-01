@@ -23,7 +23,7 @@ const CalendarPage: NextPageWithLayout = () => {
 
     const [newEntryOpen, setNewEntryOpen] = useState(false);
 
-    if (isLoading || !messages || status === "loading" || !session) {
+    if (isLoading || !entries || status === "loading" || !session) {
         return (
             <div className="flex-1 flex justify-center items-center">
                 <div>
