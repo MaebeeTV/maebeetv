@@ -120,7 +120,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                                 </li>
                             ) : (
                                 <li className={styles.navbar_button}>
-                                    <div>
+                                    <div className="flex-1">
                                         <Link href="/auth/login">
                                             <a onClick={() => { setNavbar(!navbar) }} className="px-3 py-1 flex h-full justify-center items-center">
                                                 <ArrowRightOnRectangleIcon height="32px" />
