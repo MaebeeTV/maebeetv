@@ -10,7 +10,7 @@ const Home: NextPage = () => {
             </HeroHeader>
 
             <div className="flex flex-col gap-12 items-center mx-6 flex-wrap">
-                <div className="flex gap-32 items-center justify-center text-center min-h-[75vh] flex-wrap md:flex-nowrap p-3">
+                <div className="flex gap-32 items-center justify-center text-center min-h-[65vh] flex-wrap md:flex-nowrap p-3">
                     <div className="m-3 md:inline hidden">
                         <Image src="/img/MaebeeTV-logos.png" width="400" height="400" alt="MaebeeTV Logo" />
                     </div>
