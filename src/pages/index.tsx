@@ -9,9 +9,9 @@ const Home: NextPage = () => {
                 Changing the world, one story at a time
             </HeroHeader>
 
-            <div className="flex flex-col gap-3 pr-4 pl-8 items-center mx-6">
+            <div className="flex flex-col gap-3 items-center mx-10">
                 <div className="flex gap-32 items-center justify-center text-center min-h-[65vh] max-w-[80%] mb-8 flex-wrap md:flex-nowrap p-7">
-                    <div className="md:inline hidden">
+                    <div className="md:inline hidden min-w-[150px]">
                         <Image src="/img/MaebeeTV-logos.png" width="400" height="400" alt="MaebeeTV Logo" />
                     </div>
                     <div className="flex flex-col gap-3">
