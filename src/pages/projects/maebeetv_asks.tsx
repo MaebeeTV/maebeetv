@@ -27,7 +27,7 @@ const Home: NextPage = () => {
                         <p className="px-16 pt-4 text-1xl">MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
                     </div>
                     <div className="md:w-5/12 md:text-right w-full text-white font-extrabold text-4xl md:mb-16 md:px-6">
-                        <p>MaebeeTV Asks is a webseries with eight episodes that educates people about society and dispels common misunderstandings regarding the LGBT community.</p>
+                        <p>MaebeeTV Asks is a webseries with nine episodes that educates people about society and dispels common misunderstandings regarding the LGBT community.</p>
                     </div>
                 </div>
             </div>
