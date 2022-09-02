@@ -13,7 +13,7 @@ const Home: NextPage = () => {
             </Head>
             <div className="fixed -z-50 top-0 left-0 h-full w-full bg-gradient-to-br from-orange-400 via-[#FF23AC] to-purple-700"></div>
 
-            <div className="flex-1 flex flex-col gap-6 pb-6 text-white">
+            <div className="flex-1 flex flex-col gap-6 pb-6 text-white mr-[8em]">
                 <HeroHeader className="text-white bg-transparent">
                     MaebeeTV Asks
                 </HeroHeader>
@@ -24,9 +24,9 @@ const Home: NextPage = () => {
                             className="w-full md:h-[60vh] h-[56vw]"
                             src="https://www.youtube.com/embed/r_fWFDubP_Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
                         ></iframe>
-                        <p>MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
+                        <p className="p-[2em] text-[1em]">MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
                     </div>
-                    <div className="md:w-5/12 md:text-right w-full text-white font-extrabold text-3xl">
+                    <div className="md:w-5/12 md:text-right w-full text-white font-extrabold text-[2em] mb-[3em]">
                         <p>MaebeeTV Asks is a webseries with eight episodes that educates people about society and dispels common misunderstandings regarding the LGBT community.</p>
                     </div>
                 </div>

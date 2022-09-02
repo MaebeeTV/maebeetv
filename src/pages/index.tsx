@@ -10,20 +10,20 @@ const Home: NextPage = () => {
             </HeroHeader>
 
             <div className="flex flex-col gap-12 items-center mx-6">
-                <div className="flex gap-6 items-center justify-center flex-wrap text-center min-h-[75vh]">
-                    <div className="m-3">
-                        <Image src="/img/MaebeeTV-logos.png" width="360" height="360" alt="MaebeeTV Logo" />
+                <div className="flex gap-6 items-center justify-center text-center min-h-[75vh]">
+                    <div className="m-3 ml-[8em]">
+                        <Image src="/img/MaebeeTV-logos.png" width="400" height="400" alt="MaebeeTV Logo" />
                     </div>
-                    <div className="flex flex-col gap-3">
-                        <div className="text-[4em] md:text-4xl text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
-                        <div className="text-[1em] md:text-2xl">We are a movie production company that strives to change the way stories are told.</div>
+                    <div className="flex flex-col mr-[8em] pl-[3em] gap-3">
+                        <div className="text-[4em] md:text-[4em] pl-[1em] text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
+                        <div className="text-right text-[1.5em] md:text-[1.5em]">We are a movie production company that strives to change the way stories are told.</div>
                     </div>
                 </div>
 
                 <div className="max-w-2xl">
-                    <div className="text-center text-3xl md:text-4xl mb-2 text-orange-400"><h1>Want to join our team?</h1></div>
-                    <div><p>Our company is commited to providing safe and friendly environments that can ensure the highest quality productions are created. Our films are made as a single team, with smaller groups assigned based on your own unique talents and quirks. Each team is given important tasks with flexible deadlines, all in the spirit of raising awareness and encouraging others to share their stories.</p></div>
-                    <div className="text-center mt-6 mb-6 text-xl"><h2>Use the form below to apply:</h2></div>
+                    <div className="text-center text-[1.3em] md:text-4xl mb-2 text-orange-400"><h1>Want to join our team?</h1></div>
+                    <div className="text-center text-[1em]"><p>Our company is commited to providing safe and friendly environments that can ensure the highest quality productions are created. Our films are made as a single team, with smaller groups assigned based on your own unique talents and quirks. Each team is given important tasks with flexible deadlines, all in the spirit of raising awareness and encouraging others to share their stories.</p></div>
+                    <div className="text-center mt-6 mb-6 text-xl"><h2>Use this form to apply:</h2></div>
                     <iframe
                         allowTransparency={true}
                         className="min-w-full h-[75vh] bg-transparent border-none"
