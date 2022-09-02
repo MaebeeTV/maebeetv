@@ -61,7 +61,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                             </li>
                         </ul>
                     </div>
-                    <ul className={`${styles.navbar_button_list} ${navbar ? "max-h-screen mb-3" : "max-h-0"}`}>
+                    <ul className={`${styles.navbar_button_list} ${navbar ? "max-h-screen mb-2" : "max-h-0"}`}>
                         {
                             routes.map((e) => {
                                 if (e.show_in_nav) {
