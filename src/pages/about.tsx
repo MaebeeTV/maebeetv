@@ -22,7 +22,7 @@ const About: NextPage = () => {
                 <div className="md:w-1/2 text-center">
                     <Image width={562} height={350} src="/img/about/Camera.jpg" alt="camera"></Image>
                 </div>
-                <div className="md:w-1/2 text-[1.3em]">
+                <div className="md:w-1/2 text-xl">
                     MaebeeTV is a non-profit LGBT-centered cinema production organization founded in 2021 that strives to teach lessons to young and old individuals. It allows everyday people to make their own experiences into movies or short films. We are a close-knit group of people who want to change the world one story at a time. Every story we create the more misinformation is corrected and awareness is spread.
                 </div>
             </div>

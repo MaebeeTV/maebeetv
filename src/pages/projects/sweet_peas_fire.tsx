@@ -22,7 +22,7 @@ const Home: NextPage = () => {
                         className="w-3/4 md:h-[45em] h-[56vw]"
                         src="https://www.youtube.com/embed/HK_BAvuWsNA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
                     ></iframe>
-                    <div className="flex items-center md:w-1/2 md:h-[92vh] md:text-right self-end text-white md:text-2xl text-lg leading-loose mr-[8em]">
+                    <div className="flex items-center md:w-1/2 md:h-[92vh] md:text-right self-end text-white md:text-2xl text-lg leading-loose mr-0 md:mr-32">
                         <p>Sweet Pea&apos;s Fire is a story of a creature who had no family or friends to talk to. Sweet Pea tells a fire spirit all about her life after an encounter with one, until she learns she failed to keep the fire going. In which the fire spirit perishes and Sweet Pea realizes what she&apos;s done wrong. <br/><br/> Sweet Pea&apos;s Fire is a fantastic illustration of the neglection cycle. Sweet Pea was neglected by her family in this narrative, and in order to avoid being neglected herself, she neglected others.</p>
                     </div>
                 </div>

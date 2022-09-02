@@ -13,20 +13,20 @@ const Home: NextPage = () => {
             </Head>
             <div className="fixed -z-50 top-0 left-0 h-full w-full bg-gradient-to-br from-orange-400 via-[#FF23AC] to-purple-700"></div>
 
-            <div className="flex-1 flex flex-col gap-6 pb-6 text-white mr-[8em]">
+            <div className="flex-1 flex flex-col gap-6 pb-6 text-white">
                 <HeroHeader className="text-white bg-transparent">
                     MaebeeTV Asks
                 </HeroHeader>
 
-                <div className="flex md:items-center flex-1 gap-8 mx-12 flex-wrap md:flex-nowrap">
+                <div className="flex md:items-center flex-1 gap-8 mx-12 md:mr-32 flex-wrap md:flex-nowrap">
                     <div className="md:w-7/12 w-full">
                         <iframe
                             className="w-full md:h-[60vh] h-[56vw]"
                             src="https://www.youtube.com/embed/r_fWFDubP_Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
                         ></iframe>
-                        <p className="p-[2em] text-[1em]">MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
+                        <p className="p-8 text-base">MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
                     </div>
-                    <div className="md:w-5/12 md:text-right w-full text-white font-extrabold text-[2em] mb-[3em]">
+                    <div className="md:w-5/12 md:text-right w-full text-white font-extrabold text-4xl mb-12">
                         <p>MaebeeTV Asks is a webseries with eight episodes that educates people about society and dispels common misunderstandings regarding the LGBT community.</p>
                     </div>
                 </div>
