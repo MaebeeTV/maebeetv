@@ -1,5 +1,5 @@
 .navbar_button_list {
-    @apply transition-all md:flex items-stretch md:w-auto w-full
+    @apply transition-all md:flex items-stretch md:w-auto w-full overflow-hidden md:max-h-screen
 }
 
 .navbar_button {
