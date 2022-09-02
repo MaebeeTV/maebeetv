@@ -1,5 +1,6 @@
 .navbar_button_list {
-    @apply transition-all md:flex items-stretch md:w-auto w-full
+    @apply transition-all duration-100 md:flex items-stretch md:w-auto w-full 
+    md:max-h-screen md:overflow-visible overflow-hidden md:mb-0 /* for animations regarding mobile */
 }
 
 .navbar_button {
