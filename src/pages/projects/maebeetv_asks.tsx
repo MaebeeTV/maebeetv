@@ -20,10 +20,12 @@ const Home: NextPage = () => {
 
                 <div className="flex md:items-center flex-1 gap-8 flex-wrap md:flex-nowrap text-center md:mx-24 mx-6">
                     <div className="md:w-7/12 w-full">
-                        <iframe
-                            className="w-full md:h-[60vh] h-[56vw]"
-                            src="https://www.youtube.com/embed/r_fWFDubP_Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
-                        ></iframe>
+                        <div className="w-full overflow-hidden relative pt-[56.25%]"> {/* arbirtary value is for making aspect ratio 16:9 */}
+                            <iframe
+                                className="w-full h-full top-0 bottom-0 right-0 left-0 absolute"
+                                src="https://www.youtube.com/embed/r_fWFDubP_Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
+                            ></iframe>
+                        </div>
                         <p className="px-16 pt-4 text-1xl">MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
                     </div>
                     <div className="md:w-5/12 md:text-right w-full text-white font-extrabold text-4xl md:mb-16 md:px-6">
