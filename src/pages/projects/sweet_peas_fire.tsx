@@ -18,10 +18,14 @@ const Home: NextPage = () => {
                 </HeroHeader>
 
                 <div className="flex flex-col items-center gap-6 mx-12">
-                    <iframe
-                        className="w-3/4 md:h-[45em] h-[56vw]"
-                        src="https://www.youtube.com/embed/HK_BAvuWsNA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
-                    ></iframe>
+                    <div className="md:w-4/5 w-full">
+                        <div className="w-full overflow-hidden relative pt-[56.25%]"> {/* arbirtary value is for making aspect ratio 16:9 */}
+                            <iframe
+                                className="w-full h-full top-0 bottom-0 right-0 left-0 absolute"
+                                src="https://www.youtube.com/embed/HK_BAvuWsNA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
+                            ></iframe>
+                        </div>
+                    </div>
                     <div className="flex items-center md:w-1/2 md:h-[92vh] md:text-right self-end text-white md:text-2xl text-lg leading-loose md:mr-44">
                         <p>Sweet Pea&apos;s Fire is a story of a creature who had no family or friends to talk to. Sweet Pea tells a fire spirit all about her life after an encounter with one, until she learns she failed to keep the fire going. In which the fire spirit perishes and Sweet Pea realizes what she&apos;s done wrong. <br/><br/> Sweet Pea&apos;s Fire is a fantastic illustration of the neglection cycle. Sweet Pea was neglected by her family in this narrative, and in order to avoid being neglected herself, she neglected others.</p>
                     </div>
