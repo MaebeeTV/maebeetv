@@ -1,3 +1,4 @@
+import { Clearance } from "@prisma/client";
 import { trpc } from "utils/trpc"
 
 
@@ -15,3 +16,5 @@ export const OptimisticRefreshDefault = (ctx: ReturnType<typeof trpc.useContext>
         }
     } as Parameters<typeof trpc.useMutation>[1]
 }
+
+export const ClearanceOrder: Clearance[] = [ "User", "Staff", "Moderator", "Admin", "Technician"];

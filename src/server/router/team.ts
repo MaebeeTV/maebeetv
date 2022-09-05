@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { ClearanceOrder } from "modules/trpc-helper";
 import { z } from "zod";
 import { createRouter } from "./context";
 
@@ -17,7 +18,7 @@ export const teamRouter = createRouter()
         }),
         async resolve({ ctx, input }) {
             try {
-                if (ctx.user.clearance === "User") throw new TRPCError({ code: "UNAUTHORIZED" });
+                if (ClearanceOrder.indexOf(ctx.user.clearance) < ClearanceOrder.indexOf("Staff")) throw new TRPCError({ code: "UNAUTHORIZED" });
             
                 const team = await ctx.prisma.team.create({
                     data: {
@@ -72,6 +73,7 @@ export const teamRouter = createRouter()
         }),
         async resolve({ ctx, input }) {
             try {
+                const overridePermsWithClearance = ClearanceOrder.indexOf(ctx.user.clearance) > ClearanceOrder.indexOf("Staff");
                 const adminRoleIdsOnTeam = (await ctx.prisma.role.findMany({
                     where: {
                         clearance: "Admin",
@@ -84,7 +86,7 @@ export const teamRouter = createRouter()
                         roleId: { in: adminRoleIdsOnTeam }
                     }
                 })
-                if (allowedUserWithRole) {
+                if (allowedUserWithRole || overridePermsWithClearance) {
                     return await ctx.prisma.team.delete({
                         where: {
                             id: input.id
