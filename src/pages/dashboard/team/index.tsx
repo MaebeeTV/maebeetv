@@ -13,6 +13,7 @@ import { OptimisticRefreshDefault } from "modules/trpc-helper";
 import Link from "next/link";
 import UserSearch from "components/Search/User";
 import { User } from "@prisma/client";
+import CreateTeamOrEdit from "components/Dashboard/Team/CreateOrEdit";
 
 const TeamsPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
@@ -20,11 +21,12 @@ const TeamsPage: NextPageWithLayout = () => {
     const { data: messages, isLoading } = trpc.useQuery(["team.get_all"]);
     const createTeam = trpc.useMutation("team.create", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
     const deleteTeam = trpc.useMutation("team.delete", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
+    
+    const newTeamOpenState = useState(false),
+        [newTeamOpen, setNewTeamOpen] = newTeamOpenState;
 
-    const [newTeamOpen, setNewTeamOpen] = useState(false);
-
-    const selectedUsersState = useState<User[]>([]);
-    const [selectedUsers] = selectedUsersState;
+    const selectedUsersState = useState<User[]>([]),
+        [selectedUsers] = selectedUsersState;
 
     if (isLoading || !messages || status === "loading" || !session) {
         return (
@@ -35,42 +37,11 @@ const TeamsPage: NextPageWithLayout = () => {
             </div>
         );
     }
-    console.log(selectedUsers)
 
     return (
         <>
             <div className="flex-1 m-6 relative">
-                <Dialog className="p-3 absolute top-0 left-0 flex items-center justify-center w-full h-full" open={newTeamOpen} onClose={() => setNewTeamOpen(false)}>
-                    <Dialog.Panel>
-                        <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
-                            <form
-                                onSubmit={(event) => {
-                                    event.preventDefault();
-                                    const target = event.target as unknown as { [key: string]: { value?: string, name?: string } };
-                                    const value_map = Object.assign({}, 
-                                        ...(
-                                            Object.keys(event.target).map(e => {
-                                                const target_e = target[e];
-                                                if (target_e && target_e.name) {
-                                                    return { [target_e.name]: (target_e?.value ? target_e.value : undefined) }
-                                                }
-                                            }).filter(e => e)
-                                        )
-                                    );
-                                    createTeam.mutate({memberUserIds: selectedUsers.map(e => e.id), ...value_map});
-                                    setNewTeamOpen(false);
-                                }}
-                            >
-                                <input name="name" className="my-2 text_input" placeholder="Name" required />
-                                <textarea name="description" className="my-2 text_input md:min-w-[50vw] min-w-[80vw]" placeholder="Description" />
-                                <UserSearch selectedUsersState={selectedUsersState}></UserSearch>
-
-                                <Button type="submit" className="my-2 mr-3">Create</Button>
-                                <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>
-                            </form>
-                        </Card>
-                    </Dialog.Panel>
-                </Dialog>
+                <CreateTeamOrEdit openState={newTeamOpenState}></CreateTeamOrEdit>
 
                 <div className="absolute top-0 left-0">
                     {session?.user?.clearance !== "User" ?
