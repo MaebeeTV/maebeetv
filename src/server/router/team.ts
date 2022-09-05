@@ -34,6 +34,11 @@ export const teamRouter = createRouter()
                         ).map(e => { return { userId: e.id, teamId: team.id } })
                     );
                 }
+                userIdsAddedToTeam = userIdsAddedToTeam.filter((value, index, self) =>
+                    index === self.findIndex((t) => (
+                        t.userId === value.userId
+                    ))
+                )
                 await ctx.prisma.usersOnTeam.createMany({
                     data: userIdsAddedToTeam,
                     skipDuplicates: true
