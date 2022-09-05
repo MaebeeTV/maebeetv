@@ -23,7 +23,8 @@ const TeamsPage: NextPageWithLayout = () => {
 
     const [newTeamOpen, setNewTeamOpen] = useState(false);
 
-    const [selectedUsers] = useState([] as User[]);
+    const selectedUsersState = useState<User[]>([]);
+    const [selectedUsers] = selectedUsersState;
 
     if (isLoading || !messages || status === "loading" || !session) {
         return (
@@ -62,7 +63,7 @@ const TeamsPage: NextPageWithLayout = () => {
                             >
                                 <input name="name" className="my-2 text_input" placeholder="Name" required />
                                 <textarea name="description" className="my-2 text_input md:min-w-[50vw] min-w-[80vw]" placeholder="Description" />
-                                <UserSearch selectedUsers={selectedUsers}></UserSearch>
+                                <UserSearch selectedUsersState={selectedUsersState}></UserSearch>
 
                                 <Button type="submit" className="my-2 mr-3">Create</Button>
                                 <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>

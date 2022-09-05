@@ -35,7 +35,8 @@ export const teamRouter = createRouter()
                     );
                 }
                 await ctx.prisma.usersOnTeam.createMany({
-                    data: userIdsAddedToTeam
+                    data: userIdsAddedToTeam,
+                    skipDuplicates: true
                 });
                 const role = await ctx.prisma.role.create({
                     data: {
