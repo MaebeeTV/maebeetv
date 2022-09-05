@@ -40,7 +40,7 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
                         <div className="px-1 flex gap-2">
                             {selectedUsers?.map(u => (
                                 <div key={u.id} className="h-full items-center flex gap-1">
-                                    {u.image && <Image layout="fixed" width="24px" height="24px" src={u.image}></Image>}
+                                    {u.image && <Image layout="fixed" width="24px" height="24px" src={u.image} alt={`Profile Picture of ${u.discordName}`}></Image>}
                                     {u.discordName}
                                 </div>
                             ))}
