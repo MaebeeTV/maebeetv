@@ -3,6 +3,12 @@ import { z } from "zod";
 import { createRouter } from "./context";
 
 export const teamRouter = createRouter()
+    .middleware(async ({ ctx, next }) => {
+        if (!ctx.session?.user) {
+            throw new TRPCError({ code: "UNAUTHORIZED" });
+        }
+        return next({ctx: {...ctx, user: ctx.session.user}})
+    })
     .mutation("create", {
         input: z.object({
             name: z.string(),
@@ -10,18 +16,16 @@ export const teamRouter = createRouter()
             memberUserIds: z.optional(z.string().array())
         }),
         async resolve({ ctx, input }) {
-            if (!ctx.session?.user || ctx.session.user.clearance === "User") {
-                throw new TRPCError({ code: "UNAUTHORIZED" });
-            }
-    
             try {
+                if (ctx.user.clearance === "User") throw new TRPCError({ code: "UNAUTHORIZED" });
+            
                 const team = await ctx.prisma.team.create({
                     data: {
                         name: input.name,
                         description: input.description
                     },
                 });
-                let userIdsAddedToTeam = [{ userId: ctx.session.user.id, teamId: team.id }]
+                let userIdsAddedToTeam = [{ userId: ctx.user.id, teamId: team.id }]
                 if (input.memberUserIds && input.memberUserIds.length !== 0) {
                     userIdsAddedToTeam = userIdsAddedToTeam.concat(
                         (
@@ -52,7 +56,7 @@ export const teamRouter = createRouter()
                 });
                 await ctx.prisma.usersWithRole.create({
                     data: {
-                        userId: ctx.session.user.id,
+                        userId: ctx.user.id,
                         roleId: role.id,
                     }
                 });
@@ -67,10 +71,6 @@ export const teamRouter = createRouter()
             id: z.optional(z.string())
         }),
         async resolve({ ctx, input }) {
-            if (!ctx.session?.user) {
-                throw new TRPCError({ code: "UNAUTHORIZED" });
-            }
-    
             try {
                 const adminRoleIdsOnTeam = (await ctx.prisma.role.findMany({
                     where: {
@@ -80,7 +80,7 @@ export const teamRouter = createRouter()
                 })).map(e => e.id)
                 const allowedUserWithRole = await ctx.prisma.usersWithRole.findFirst({
                     where: {
-                        userId: ctx.session.user.id,
+                        userId: ctx.user.id,
                         roleId: { in: adminRoleIdsOnTeam }
                     }
                 })
@@ -90,6 +90,9 @@ export const teamRouter = createRouter()
                             id: input.id
                         }
                     })
+                }
+                else {
+                    throw new TRPCError({ code: "UNAUTHORIZED" });
                 }
             } catch (error) {
                 console.log(error);
@@ -105,7 +108,7 @@ export const teamRouter = createRouter()
             try {
                 const teamIds = (await ctx.prisma.usersOnTeam.findMany({
                     where: {
-                        userId: ctx.session.user.id
+                        userId: ctx.user.id
                     }
                 })).map(e => e.teamId);
                 return await ctx.prisma.team.findMany({
