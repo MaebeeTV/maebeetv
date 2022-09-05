@@ -56,8 +56,7 @@ const TeamsPage: NextPageWithLayout = () => {
                                             }).filter(e => e)
                                         )
                                     );
-                                    console.log(value_map);
-                                    createTeam.mutate(value_map);
+                                    createTeam.mutate({memberUserIds: selectedUsers.map(e => e.id), ...value_map});
                                     setNewTeamOpen(false);
                                 }}
                             >
