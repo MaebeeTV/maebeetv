@@ -36,7 +36,7 @@ const TeamsPage: NextPageWithLayout = () => {
             <div className="flex-1 m-6 relative">
                 <Dialog className="p-3 absolute top-0 left-0 flex items-center justify-center w-full h-full" open={newTeamOpen} onClose={() => setNewTeamOpen(false)}>
                     <Dialog.Panel>
-                        <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-gray-900 bg-white max-w-none">
+                        <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
                             <form
                                 onSubmit={(event) => {
                                     event.preventDefault();
@@ -56,8 +56,8 @@ const TeamsPage: NextPageWithLayout = () => {
                                     setNewTeamOpen(false);
                                 }}
                             >
-                                <input name="name" className="w-full my-2 p-3 border-none" placeholder="Name" />
-                                <textarea name="description" className="w-full my-2 p-3" placeholder="Description" />
+                                <input name="name" className="my-2 text_input" placeholder="Name" required />
+                                <textarea name="description" className="my-2 text_input md:min-w-[50vw] min-w-[80vw]" placeholder="Description" />
 
                                 <Button type="submit" className="my-2 mr-3">Create</Button>
                                 <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>

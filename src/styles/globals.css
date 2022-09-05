@@ -21,4 +21,8 @@
     .dark {
         background-color: #090909;
     }
+
+    .text_input {
+        @apply border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:backdrop-brightness-110 dark:border-gray-600 dark:text-white
+    }
 }
