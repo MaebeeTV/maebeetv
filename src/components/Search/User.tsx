@@ -41,7 +41,7 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
                     (
                         <>
                             {selectedUsers?.map(u => (
-                                <div key={u.id} className="flex-1 justify-around items-center rounded-none flex gap-1 text_input border-y-0 border-r-[1px]">
+                                <div key={u.id} className="flex-1 justify-around items-center rounded-none flex gap-1 text_input border-y-0 border-x-0 border-r-[1px]">
                                     {u.image && <Image layout="fixed" width="18" height="18" src={u.image} alt={`Profile Picture of ${u.discordName}`}></Image>}
                                     {u.discordName}
                                     <button onClick={() => {setSelectedUsers(selectedUsers.filter(e => e.id !== u.id))}}>
