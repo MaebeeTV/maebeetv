@@ -55,11 +55,11 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
                 
                 <Combobox.Input className="text_input rounded-none flex-[100] w-full h-full min-w-[100px] border-none" placeholder="Add Users" onChange={(event) => setQuery(event.target.value)} onKeyDown={input_key_down} />
             </Combobox.Button>
-            <Combobox.Options className="mt-1 absolute max-h-60 w-full overflow-auto bg-white dark:bg-black">
+            <Combobox.Options className="absolute max-h-60 w-full overflow-auto bg-white dark:bg-black">
                 {
                     filteredUsers ? 
                         filteredUsers.map((user) => (
-                            <Combobox.Option className="text_input cursor-pointer" key={user.id} value={user}>
+                            <Combobox.Option className="mt-1 text_input cursor-pointer" key={user.id} value={user}>
                                 {user.discordName}
                             </Combobox.Option>
                         )) 
