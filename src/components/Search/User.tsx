@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { trpc } from "utils/trpc";
 
+import { XCircleIcon } from "@heroicons/react/24/solid";
+
 export interface UserSearchProps {
     selectedUsersState: [User[], Dispatch<SetStateAction<User[]>>]
 }
@@ -42,6 +44,9 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
                                 <div key={u.id} className="h-full items-center flex gap-1">
                                     {u.image && <Image layout="fixed" width="24px" height="24px" src={u.image} alt={`Profile Picture of ${u.discordName}`}></Image>}
                                     {u.discordName}
+                                    <button onClick={() => {setSelectedUsers(selectedUsers.filter(e => e.id !== u.id))}}>
+                                        <XCircleIcon height="18px" width="18px" />
+                                    </button>
                                 </div>
                             ))}
                         </div>
