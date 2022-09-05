@@ -36,24 +36,24 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
             as="div"
             className="relative my-2"
         >
-            <Combobox.Button className="text_input p-0 overflow-hidden flex cursor-default">
+            <Combobox.Button className="text_input p-0 flex-wrap overflow-hidden flex cursor-default">
                 { selectedUsers.length !== 0 && 
                     (
-                        <div className="px-1 flex gap-2">
+                        <>
                             {selectedUsers?.map(u => (
-                                <div key={u.id} className="h-full items-center flex gap-1">
-                                    {u.image && <Image layout="fixed" width="24px" height="24px" src={u.image} alt={`Profile Picture of ${u.discordName}`}></Image>}
+                                <div key={u.id} className="flex-1 justify-around items-center rounded-none flex gap-1 text_input border-y-0 border-r-[1px]">
+                                    {u.image && <Image layout="fixed" width="18" height="18" src={u.image} alt={`Profile Picture of ${u.discordName}`}></Image>}
                                     {u.discordName}
                                     <button onClick={() => {setSelectedUsers(selectedUsers.filter(e => e.id !== u.id))}}>
                                         <XCircleIcon height="18px" width="18px" />
                                     </button>
                                 </div>
                             ))}
-                        </div>
+                        </>
                     ) 
                 }
                 
-                <Combobox.Input className="w-full h-full p-2.5" placeholder="Add Users" onChange={(event) => setQuery(event.target.value)} onKeyDown={input_key_down} />
+                <Combobox.Input className="text_input rounded-none flex-[100] w-full h-full min-w-[100px] border-none" placeholder="Add Users" onChange={(event) => setQuery(event.target.value)} onKeyDown={input_key_down} />
             </Combobox.Button>
             <Combobox.Options className="mt-1 absolute max-h-60 w-full overflow-auto bg-white dark:bg-black">
                 {
