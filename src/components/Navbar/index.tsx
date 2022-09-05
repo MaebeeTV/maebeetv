@@ -1,7 +1,7 @@
 import { Route, routes as impted_routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, Fragment, useState } from "react";
 import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
@@ -10,7 +10,7 @@ import Head from "next/head";
 import { useSession, signOut } from "next-auth/react";
 
 import styles from 'styles/Navbar.module.css'
-import { Menu } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 
 export interface NavbarProps {
     routes?: Route[]
@@ -79,17 +79,27 @@ const Navbar: FC<NavbarProps> = (props) => {
                                                             {e.folder} <ChevronDownIcon className="ml-1 mt-1" height="18px" />
                                                         </span>
                                                     </Menu.Button>
-                                                    <Menu.Items className={`md:absolute md:mt-12 right-0 min-w-full ${bg_color}`}>
-                                                        {folder_routes.map(folder_route => (
-                                                            <Menu.Item key={folder_route.path} as="div" className={`${styles.navbar_button} ${folder_route.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
-                                                                <Link href={folder_route.path} >
-                                                                    <a className="" onClick={() => { setNavbar(!navbar) }}>
-                                                                        {folder_route.name}
-                                                                    </a>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                        ))}
-                                                    </Menu.Items>
+                                                    <Transition
+                                                        as={Fragment}
+                                                        enter="transition ease-out duration-100"
+                                                        enterFrom="transform opacity-0 scale-95"
+                                                        enterTo="transform opacity-100 scale-100"
+                                                        leave="transition ease-in duration-75"
+                                                        leaveFrom="transform opacity-100 scale-100"
+                                                        leaveTo="transform opacity-0 scale-95"
+                                                    >
+                                                        <Menu.Items className={`md:absolute md:mt-12 right-0 min-w-full ${bg_color}`}>
+                                                            {folder_routes.map(folder_route => (
+                                                                <Menu.Item key={folder_route.path} as="div" className={`${styles.navbar_button} ${folder_route.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
+                                                                    <Link href={folder_route.path} >
+                                                                        <a className="" onClick={() => { setNavbar(!navbar) }}>
+                                                                            {folder_route.name}
+                                                                        </a>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                            ))}
+                                                        </Menu.Items>
+                                                    </Transition>
                                                 </div>
                                             </Menu>
                                         )
