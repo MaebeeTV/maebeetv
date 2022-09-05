@@ -15,6 +15,14 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
     const filteredUsers = trpc.useQuery(["user.get_search", {
         query
     }]).data;
+
+    const input_key_down = (e: any) => {
+        if (!e.target.value && e.code === "Backspace") {
+            const selectedUsersCopy = [...selectedUsers];
+            selectedUsersCopy.pop();
+            setSelectedUsers(selectedUsersCopy);
+        }
+    };
         
     return (
         <Combobox 
@@ -40,7 +48,7 @@ const UserSearch: FC<UserSearchProps> = ({ selectedUsersState: [ selectedUsers, 
                     ) 
                 }
                 
-                <Combobox.Input className="w-full h-full p-2.5" placeholder="Add Users" onChange={(event) => setQuery(event.target.value)} />
+                <Combobox.Input className="w-full h-full p-2.5" placeholder="Add Users" onChange={(event) => setQuery(event.target.value)} onKeyDown={input_key_down} />
             </Combobox.Button>
             <Combobox.Options className="mt-1 absolute max-h-60 w-full overflow-auto bg-white dark:bg-black">
                 {
