@@ -5,7 +5,6 @@ import { createRouter } from "./context";
 export const teamRouter = createRouter()
     .mutation("create", {
         input: z.object({
-            id: z.optional(z.string()),
             name: z.string(),
             description: z.optional(z.string()),
             memberUserIds: z.optional(z.string().array())
