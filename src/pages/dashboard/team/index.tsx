@@ -7,10 +7,12 @@ import Spinner from "components/Spinner";
 import Button from "components/Button";
 import Card from "components/Card";
 import { useSession } from "next-auth/react";
-import { Dialog } from "@headlessui/react";
+import { Combobox, Dialog } from "@headlessui/react";
 
 import { OptimisticRefreshDefault } from "modules/trpc-helper";
 import Link from "next/link";
+import UserSearch from "components/Search/User";
+import { User } from "@prisma/client";
 
 const TeamsPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
@@ -21,6 +23,8 @@ const TeamsPage: NextPageWithLayout = () => {
 
     const [newTeamOpen, setNewTeamOpen] = useState(false);
 
+    const [selectedUsers] = useState([] as User[]);
+
     if (isLoading || !messages || status === "loading" || !session) {
         return (
             <div className="flex-1 flex justify-center items-center">
@@ -30,6 +34,7 @@ const TeamsPage: NextPageWithLayout = () => {
             </div>
         );
     }
+    console.log(selectedUsers)
 
     return (
         <>
@@ -58,6 +63,7 @@ const TeamsPage: NextPageWithLayout = () => {
                             >
                                 <input name="name" className="my-2 text_input" placeholder="Name" required />
                                 <textarea name="description" className="my-2 text_input md:min-w-[50vw] min-w-[80vw]" placeholder="Description" />
+                                <UserSearch selectedUsers={selectedUsers}></UserSearch>
 
                                 <Button type="submit" className="my-2 mr-3">Create</Button>
                                 <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>
