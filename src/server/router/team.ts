@@ -69,7 +69,7 @@ export const teamRouter = createRouter()
     })
     .mutation("edit", {
         input: z.object({
-            id: z.optional(z.string()),
+            id: z.string(),
             name: z.string(),
             description: z.optional(z.string()),
             memberUserIds: z.optional(z.string().array())

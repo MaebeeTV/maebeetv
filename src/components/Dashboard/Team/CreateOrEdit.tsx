@@ -40,7 +40,8 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, openState }) => {
                                     }).filter(e => e)
                                 )
                             );
-                            createTeam.mutate({memberUserIds: selectedUsers.map(e => e.id), ...value_map});
+                            if (teamId) editTeam.mutate({memberUserIds: selectedUsers.map(e => e.id), ...value_map, id: teamId});
+                            else createTeam.mutate({memberUserIds: selectedUsers.map(e => e.id), ...value_map});
                             setNewTeamOpen(false);
                         }}
                     >
