@@ -54,7 +54,7 @@ const TeamsPage: NextPageWithLayout = () => {
                     {
                         messages.map(e =>
                             (
-                                <Card key={e.id} title={e.name} className="w-full flex-1 md:flex-none min-w-max">
+                                <Card key={e.id} title={e.name} className="flex-1 md:flex-none w-full min-w-fit md:min-w-min max-w-full md:max-w-md">
                                     {e.description}<br/>
                                     <Button onClick={() => deleteTeam.mutate({ id: e.id })} className="mr-3 mt-2">Delete</Button>
                                     <Button className="mr-3 mt-2">
