@@ -40,14 +40,16 @@ const TeamsPage: NextPageWithLayout = () => {
     return (
         <>
             <div className="flex-1 m-6 relative">
-                <CreateTeamOrEdit openState={newTeamOpenState}></CreateTeamOrEdit>
-
-                <div className="absolute top-0 left-0">
-                    {session?.user?.clearance !== "User" ?
-                        <Button onClick={() => setNewTeamOpen(true)}>Create Team</Button>
-                        : <></>
-                    }
-                </div>
+                <CreateTeamOrEdit>
+                    {([_openState, setOpenState ]) => (
+                        <div className="absolute top-0 left-0">
+                            {session?.user?.clearance !== "User" ?
+                                <Button onClick={() => setOpenState(true)}>Create Team</Button>
+                                : <></>
+                            }
+                        </div>
+                    )}
+                </CreateTeamOrEdit>
                 <div className="my-16 flex justify-center gap-6 flex-wrap">
                     {
                         messages.map(e =>
