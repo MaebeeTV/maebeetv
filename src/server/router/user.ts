@@ -37,7 +37,8 @@ export const userRouter = createRouter()
                 },
                 where: {
                     discordName: {
-                        contains: input.query
+                        contains: input.query,
+                        mode: "insensitive"
                     }
                 }
             })
