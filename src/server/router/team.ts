@@ -111,7 +111,7 @@ export const teamRouter = createRouter()
                     await ctx.prisma.usersOnTeam.deleteMany({
                         where: {
                             id: input.id,
-                            userId: { notIn: input.memberUserIds }
+                            userId: { notIn: userIdsAddedToTeam.map(e => e.userId) }
                         }
                     });
                     await ctx.prisma.usersOnTeam.createMany({
