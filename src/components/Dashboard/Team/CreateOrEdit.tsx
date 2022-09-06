@@ -15,6 +15,7 @@ export interface CreateTeamOrEditProps {
 const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, openState }) => {
     const ctx = trpc.useContext();
     const createTeam = trpc.useMutation("team.create", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
+    const editTeam = trpc.useMutation("team.edit", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
 
     const selectedUsersState = useState<User[]>([]);
     const [selectedUsers] = selectedUsersState;

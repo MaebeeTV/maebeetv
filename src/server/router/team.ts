@@ -173,10 +173,6 @@ export const teamRouter = createRouter()
     })
     .query("get_all", {
         async resolve({ ctx }) {
-            if (!ctx.session?.user) {
-                throw new TRPCError({ code: "UNAUTHORIZED" });
-            }
-
             try {
                 const teamIds = (await ctx.prisma.usersOnTeam.findMany({
                     where: {
@@ -186,6 +182,22 @@ export const teamRouter = createRouter()
                 return await ctx.prisma.team.findMany({
                     where: {
                         id: { in: teamIds }
+                    }
+                })
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
+    })
+    .query("get", {
+        input: z.object({
+            id: z.string()
+        }),
+        async resolve({ ctx, input }) {
+            try {
+                return await ctx.prisma.team.findFirst({
+                    where: {
+                        id: input.id
                     }
                 })
             } catch (error) {

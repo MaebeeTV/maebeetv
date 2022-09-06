@@ -19,7 +19,6 @@ const TeamsPage: NextPageWithLayout = () => {
     const ctx = trpc.useContext();
     const { data: session, status } = useSession();
     const { data: messages, isLoading } = trpc.useQuery(["team.get_all"]);
-    const createTeam = trpc.useMutation("team.create", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
     const deleteTeam = trpc.useMutation("team.delete", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
     
     const newTeamOpenState = useState(false),
