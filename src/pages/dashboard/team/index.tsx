@@ -57,11 +57,16 @@ const TeamsPage: NextPageWithLayout = () => {
                                 <Card key={e.id} title={e.name} className="w-full flex-1 md:flex-none min-w-max">
                                     {e.description}<br/>
                                     <Button onClick={() => deleteTeam.mutate({ id: e.id })} className="mr-3 mt-2">Delete</Button>
-                                    <Button className="mt-2">
+                                    <Button className="mr-3 mt-2">
                                         <Link href={`/dashboard/team/${e.id}`}>
                                             <a>View</a>
                                         </Link>
                                     </Button>
+                                    <CreateTeamOrEdit teamId={e.id}>
+                                        {([_openState, setOpenState ]) => (
+                                            <Button onClick={() => setOpenState(true)} className="mr-3 mt-2">Edit</Button>
+                                        )}
+                                    </CreateTeamOrEdit>
                                 </Card>
                             )
                         )

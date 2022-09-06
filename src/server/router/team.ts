@@ -91,7 +91,7 @@ export const teamRouter = createRouter()
                 })
                 if (allowedUserWithRole || overridePermsWithClearance) {
                     // user validation
-                    let userIdsAddedToTeam = [{ userId: ctx.user.id, teamId: input.id }]
+                    let userIdsAddedToTeam = [{ id: undefined as string | undefined, userId: ctx.user.id, teamId: input.id }]
                     if (input.memberUserIds && input.memberUserIds.length !== 0) {
                         userIdsAddedToTeam = userIdsAddedToTeam.concat(
                             (
@@ -100,7 +100,7 @@ export const teamRouter = createRouter()
                                         id: { in: input.memberUserIds }
                                     }
                                 })
-                            ).map(e => { return { userId: e.id, teamId: input.id } })
+                            ).map(e => { return { id: undefined, userId: e.id, teamId: input.id } })
                         );
                     }
                     userIdsAddedToTeam = userIdsAddedToTeam.filter((value, index, self) =>
@@ -113,6 +113,17 @@ export const teamRouter = createRouter()
                             id: input.id,
                             userId: { notIn: userIdsAddedToTeam.map(e => e.userId) }
                         }
+                    });
+                    (await ctx.prisma.usersOnTeam.findMany({
+                        where: {
+                            AND: {
+                                userId: { in: userIdsAddedToTeam.map(e => e.userId) },
+                                teamId: input.id
+                            }
+                        }
+                    })).forEach(el => { 
+                        const found = userIdsAddedToTeam.find(e => e.teamId === el.teamId && el.userId === el.userId);
+                        if (found) found.id = el.id;
                     });
                     await ctx.prisma.usersOnTeam.createMany({
                         data: userIdsAddedToTeam,
