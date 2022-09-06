@@ -1,10 +1,10 @@
 import { Dialog } from "@headlessui/react";
-import { User } from "@prisma/client";
+import { Team, User } from "@prisma/client";
 import Button from "components/Button";
 import Card from "components/Card";
 import UserSearch from "components/Search/User";
 import { OptimisticRefreshDefault } from "modules/trpc-helper";
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from "react";
 import { trpc } from "utils/trpc";
 
 export interface CreateTeamOrEditProps {
@@ -16,12 +16,24 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
     const ctx = trpc.useContext();
     const createTeam = trpc.useMutation("team.create", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
     const editTeam = trpc.useMutation("team.edit", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
-
-    const selectedUsersState = useState<User[]>([]);
-    const [selectedUsers] = selectedUsersState;
+    
+    const selectedUsersState = useState<User[]>([]),
+        [selectedUsers] = selectedUsersState;
 
     const openState = useState(false),
         [newTeamOpen, setNewTeamOpen] = openState;
+    
+    const form_ref = useRef<HTMLFormElement>(null)
+
+    const query = teamId ? trpc.useQuery(["team.get", { id: teamId }], { enabled: newTeamOpen }) : undefined;
+
+    if (query?.data && form_ref.current) {
+        for (const e in query.data) {
+            if (form_ref.current[e]) {
+                form_ref.current[e].value = (query.data as any)[e]
+            }
+        }  
+    }
 
     return (
         <>
@@ -30,6 +42,7 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
                 <Dialog.Panel>
                     <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
                         <form
+                            ref={form_ref}
                             onSubmit={(event) => {
                                 event.preventDefault();
                                 const target = event.target as unknown as { [key: string]: { value?: string, name?: string } };
@@ -52,7 +65,7 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
                             <textarea name="description" className="my-2 text_input md:min-w-[50vw] min-w-[80vw]" placeholder="Description" />
                             <UserSearch selectedUsersState={selectedUsersState}></UserSearch>
 
-                            <Button type="submit" className="my-2 mr-3">Create</Button>
+                            <Button type="submit" className="my-2 mr-3">{teamId ? "Edit" : "Create"}</Button>
                             <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>
                         </form>
                     </Card>
