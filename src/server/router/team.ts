@@ -103,11 +103,13 @@ export const teamRouter = createRouter()
                             ).map(e => { return { id: undefined, userId: e.id, teamId: input.id } })
                         );
                     }
+                    
                     userIdsAddedToTeam = userIdsAddedToTeam.filter((value, index, self) =>
                         index === self.findIndex((t) => (
                             t.userId === value.userId
                         ))
                     )
+
                     await ctx.prisma.usersOnTeam.deleteMany({
                         where: {
                             AND: {
@@ -116,17 +118,21 @@ export const teamRouter = createRouter()
                             }
                         }
                     });
-                    (await ctx.prisma.usersOnTeam.findMany({
+
+                    const validIdArr = await ctx.prisma.usersOnTeam.findMany({
                         where: {
                             AND: {
                                 userId: { in: userIdsAddedToTeam.map(e => e.userId) },
                                 teamId: input.id
                             }
                         }
-                    })).forEach(el => { 
-                        const found = userIdsAddedToTeam.find(e => e.teamId === el.teamId && el.userId === el.userId);
-                        if (found) found.id = el.id;
                     });
+                    for (const el of userIdsAddedToTeam) {
+                        el.id = validIdArr.find(e => e.teamId === el.teamId && e.userId === el.userId)?.id;
+                    }
+                    
+                    console.log(userIdsAddedToTeam)
+                    
                     await ctx.prisma.usersOnTeam.createMany({
                         data: userIdsAddedToTeam,
                         skipDuplicates: true
