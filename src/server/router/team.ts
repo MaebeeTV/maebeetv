@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { ClearanceOrder } from "modules/trpc-helper";
+import { ClearanceOrder, SubsetOfClearanceOrder } from "modules/trpc-helper";
 import { z } from "zod";
 import { createRouter } from "./context";
 
@@ -62,6 +62,76 @@ export const teamRouter = createRouter()
                     }
                 });
                 return team;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    })
+    .mutation("edit", {
+        input: z.object({
+            id: z.optional(z.string()),
+            name: z.string(),
+            description: z.optional(z.string()),
+            memberUserIds: z.optional(z.string().array())
+        }),
+        async resolve({ ctx, input }) {
+            try {
+                const overridePermsWithClearance = ClearanceOrder.indexOf(ctx.user.clearance) > ClearanceOrder.indexOf("Staff");
+                const editorRoleIdsOnTeam = (await ctx.prisma.role.findMany({
+                    where: {
+                        clearance: { in: SubsetOfClearanceOrder("Staff") },
+                        teamId: input.id
+                    }
+                })).map(e => e.id);
+                const allowedUserWithRole = await ctx.prisma.usersWithRole.findFirst({
+                    where: {
+                        userId: ctx.user.id,
+                        roleId: { in: editorRoleIdsOnTeam }
+                    }
+                })
+                if (allowedUserWithRole || overridePermsWithClearance) {
+                    // user validation
+                    let userIdsAddedToTeam = [{ userId: ctx.user.id, teamId: input.id }]
+                    if (input.memberUserIds && input.memberUserIds.length !== 0) {
+                        userIdsAddedToTeam = userIdsAddedToTeam.concat(
+                            (
+                                await ctx.prisma.user.findMany({
+                                    where: {
+                                        id: { in: input.memberUserIds }
+                                    }
+                                })
+                            ).map(e => { return { userId: e.id, teamId: input.id } })
+                        );
+                    }
+                    userIdsAddedToTeam = userIdsAddedToTeam.filter((value, index, self) =>
+                        index === self.findIndex((t) => (
+                            t.userId === value.userId
+                        ))
+                    )
+                    await ctx.prisma.usersOnTeam.deleteMany({
+                        where: {
+                            id: input.id,
+                            userId: { notIn: input.memberUserIds }
+                        }
+                    });
+                    await ctx.prisma.usersOnTeam.createMany({
+                        data: userIdsAddedToTeam,
+                        skipDuplicates: true
+                    });
+
+                    return await ctx.prisma.team.update({
+                        where: {
+                            id: input.id
+                        },
+                        data: {
+                            name: input.name,
+                            description: input.description
+                        }
+                    })
+                }
+                else {
+                    throw new TRPCError({ code: "UNAUTHORIZED" });
+                }
             } catch (error) {
                 console.log(error);
             }

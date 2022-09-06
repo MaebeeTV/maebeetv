@@ -18,3 +18,10 @@ export const OptimisticRefreshDefault = (ctx: ReturnType<typeof trpc.useContext>
 }
 
 export const ClearanceOrder: Clearance[] = [ "User", "Staff", "Moderator", "Admin", "Technician"];
+
+export const SubsetOfClearanceOrder = (lower: Clearance, upper?: Clearance) => {
+    if (upper) {
+        return ClearanceOrder.slice(ClearanceOrder.indexOf(lower), ClearanceOrder.indexOf(upper) + 1);
+    }
+    return ClearanceOrder.slice(ClearanceOrder.indexOf(lower));
+}
