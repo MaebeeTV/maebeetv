@@ -215,4 +215,29 @@ export const teamRouter = createRouter()
                 console.log("error", error);
             }
         }
+    })
+    .query("get_users", {
+        input: z.object({
+            id: z.string()
+        }),
+        async resolve({ ctx, input }) {
+            try {
+                const userIds = (await ctx.prisma.usersOnTeam.findMany({
+                    where: {
+                        teamId: {
+                            in: input.id
+                        }
+                    }
+                })).map(e => e.userId);
+                return await ctx.prisma.user.findMany({
+                    where: {
+                        id: {
+                            in: userIds
+                        }
+                    }
+                })
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
     });

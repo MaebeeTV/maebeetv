@@ -18,21 +18,26 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
     const editTeam = trpc.useMutation("team.edit", OptimisticRefreshDefault(ctx, ["team.get_all"]) as any);
     
     const selectedUsersState = useState<User[]>([]),
-        [selectedUsers] = selectedUsersState;
+        [selectedUsers, setSelectedUsers] = selectedUsersState;
 
     const openState = useState(false),
         [newTeamOpen, setNewTeamOpen] = openState;
     
     const form_ref = useRef<HTMLFormElement>(null)
 
-    const query = teamId ? trpc.useQuery(["team.get", { id: teamId }], { enabled: newTeamOpen }) : undefined;
-
-    if (query?.data && form_ref.current) {
-        for (const e in query.data) {
-            if (form_ref.current[e]) {
-                form_ref.current[e].value = (query.data as any)[e]
-            }
-        }  
+    if (teamId) {
+        trpc.useQuery(["team.get", { id: teamId }], { enabled: newTeamOpen, 
+            onSuccess: (e) => {
+                if (e && form_ref.current) {
+                    for (const i in e) {
+                        if (form_ref.current[i]) {
+                            form_ref.current[i].value = (e as any)[i]
+                        }
+                    }
+                }
+            } 
+        });
+        trpc.useQuery(["team.get_users", { id: teamId }], { enabled: newTeamOpen, onSuccess: (e) => { setSelectedUsers(e ? e : selectedUsers) } });
     }
 
     return (
