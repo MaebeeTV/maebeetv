@@ -25,6 +25,8 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
     
     const form_ref = useRef<HTMLFormElement>(null)
 
+    const createOrEditText = teamId ? "Edit" : "Create";
+
     if (teamId) {
         trpc.useQuery(["team.get", { id: teamId }], { enabled: newTeamOpen, 
             onSuccess: (e) => {
@@ -45,7 +47,7 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
             { children(openState) }
             <Dialog className="p-3 absolute top-0 left-0 flex items-center justify-center w-full h-full" open={newTeamOpen} onClose={() => setNewTeamOpen(false)}>
                 <Dialog.Panel>
-                    <Card title="Create Team" className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
+                    <Card title={`${createOrEditText} Team`} className="dark:backdrop-filter-none dark:bg-black bg-white max-w-none">
                         <form
                             ref={form_ref}
                             onSubmit={(event) => {
@@ -70,7 +72,7 @@ const CreateTeamOrEdit: FC<CreateTeamOrEditProps> = ({ teamId, children }) => {
                             <textarea name="description" className="my-2 text_input md:min-w-[50vw] min-w-[80vw]" placeholder="Description" />
                             <UserSearch selectedUsersState={selectedUsersState}></UserSearch>
 
-                            <Button type="submit" className="my-2 mr-3">{teamId ? "Edit" : "Create"}</Button>
+                            <Button type="submit" className="my-2 mr-3">{createOrEditText}</Button>
                             <Button className="my-2" onClick={() => setNewTeamOpen(false)}>Cancel</Button>
                         </form>
                     </Card>
