@@ -24,7 +24,7 @@ const Home: NextPage = () => {
                             <iframe
                                 className="w-full h-full top-0 bottom-0 right-0 left-0 absolute"
                                 src="https://www.youtube.com/embed/r_fWFDubP_Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
-                            ></iframe>
+                            />
                         </div>
                         <p className="px-16 pt-4 text-1xl">MaebeeTV Asks was created by Mae Spencer, MaebeeTV&apos;s CEO, in an effort to provide everyone with access to knowledge they need to learn.</p>
                     </div>

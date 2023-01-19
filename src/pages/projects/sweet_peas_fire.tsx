@@ -23,7 +23,7 @@ const Home: NextPage = () => {
                             <iframe
                                 className="w-full h-full top-0 bottom-0 right-0 left-0 absolute"
                                 src="https://www.youtube.com/embed/HK_BAvuWsNA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}
-                            ></iframe>
+                            />
                         </div>
                     </div>
                     <div className="flex items-center md:w-1/2 md:h-[92vh] md:text-right self-end text-white md:text-2xl text-lg leading-loose md:mr-44">
