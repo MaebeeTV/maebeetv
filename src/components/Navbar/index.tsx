@@ -122,23 +122,13 @@ const Navbar: FC<NavbarProps> = (props) => {
                             <ThemeSwitch></ThemeSwitch>
                         </li>
                         {
-                            session ? (
-                                <li className={styles.navbar_button}>
-                                    <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { signOut({ callbackUrl: location.origin }) }}>
+                            <li className={styles.navbar_button}>
+                                <a href="https://app.clickup.com/9005057077/home">
+                                    <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { }) }}>
                                         <ArrowLeftOnRectangleIcon height="32px" />
                                     </button>
-                                </li>
-                            ) : (
-                                <li className={styles.navbar_button}>
-                                    <div className="flex-1">
-                                        <Link href="/auth/login">
-                                            <a onClick={() => { setNavbar(!navbar) }} className="px-3 py-1 flex h-full justify-center items-center">
-                                                <ArrowRightOnRectangleIcon height="32px" />
-                                            </a>
-                                        </Link>
-                                    </div>
-                                </li>
-                            )
+                                </a>
+                            </li>
                         }
                     </ul>
                 </div>
