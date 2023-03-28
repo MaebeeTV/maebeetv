@@ -124,7 +124,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         {
                             <li className={styles.navbar_button}>
                                 <a href="https://app.clickup.com/9005057077/home">
-                                    <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { }) }}>
+                                    <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { }}>
                                         <ArrowLeftOnRectangleIcon height="32px" />
                                     </button>
                                 </a>
