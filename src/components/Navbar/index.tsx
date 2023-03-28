@@ -2,12 +2,10 @@ import { Route, routes as impted_routes } from "modules/routes";
 import Link from "next/link";
 import Image from "next/image";
 import { FC, Fragment, useState } from "react";
-import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { useRouter } from "next/router";
 import ThemeSwitch from "./ThemeSwitch";
 import Head from "next/head";
-
-import { useSession, signOut } from "next-auth/react";
 
 import styles from 'styles/Navbar.module.css'
 import { Menu, Transition } from "@headlessui/react";
@@ -21,8 +19,6 @@ const Navbar: FC<NavbarProps> = (props) => {
 
     const [navbar, setNavbar] = useState(false);
     const router = useRouter();
-
-    const { data: session } = useSession();
 
     const found_route = routes.find((e) => e.path == router.route);
 
@@ -121,15 +117,13 @@ const Navbar: FC<NavbarProps> = (props) => {
                         <li className={styles.navbar_button} >
                             <ThemeSwitch></ThemeSwitch>
                         </li>
-                        {
-                            <li className={styles.navbar_button}>
-                                <a href="https://app.clickup.com/9005057077/home">
-                                    <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout" onClick={() => { }}>
-                                        <ArrowLeftOnRectangleIcon height="32px" />
-                                    </button>
-                                </a>
-                            </li>
-                        }
+                        <li className={styles.navbar_button}>
+                            <a href="https://app.clickup.com/9005057077/home">
+                                <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout">
+                                    <ArrowLeftOnRectangleIcon height="32px" />
+                                </button>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
