@@ -68,7 +68,6 @@ const Navbar: FC<NavbarProps> = (props) => {
                                         const folder_routes = routes.filter(e => e.folder);
 
                                         return (
-                                            <div>
                                                 <Menu as="li" key={e.folder} className="relative">
                                                     <div className="flex-1 flex items-stretch flex-wrap md:flex-nowrap">
                                                         <Menu.Button className={styles.navbar_button}>
@@ -98,8 +97,6 @@ const Navbar: FC<NavbarProps> = (props) => {
                                                             </Menu.Items>
                                                         </Transition>
                                                     </div>
-                                                </Menu>
-                                                <Menu as="li" key={e.folder} className="relative">
                                                     <div className="flex-1 flex items-stretch flex-wrap md:flex-nowrap">
                                                         <Menu.Button className={styles.navbar_button}>
                                                             <span className={styles.navbar_button_button}>
@@ -129,7 +126,6 @@ const Navbar: FC<NavbarProps> = (props) => {
                                                         </Transition>
                                                     </div>
                                                 </Menu>
-                                            </div>
                                         )
                                     }
                                     else {
