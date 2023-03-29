@@ -71,7 +71,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                                             <Menu as="li" key={e.folder} className="relative">
                                                 <div className="flex-1 flex items-stretch flex-wrap md:flex-nowrap">
                                                     <Menu.Button className={styles.navbar_button}>
-                                                        <span className={styles.navbar_button}>
+                                                        <span className={styles.navbar_button_button}>
                                                             {e.folder} <ChevronDownIcon className="ml-1 mt-1" height="18px" />
                                                         </span>
                                                     </Menu.Button>
@@ -86,9 +86,9 @@ const Navbar: FC<NavbarProps> = (props) => {
                                                     >
                                                         <Menu.Items className={`md:absolute md:mt-12 right-0 min-w-full ${bg_color}`}>
                                                             {folder_routes.map(folder_route => (
-                                                                <Menu.Item key={folder_route.path} as="div" className={`${styles.navbar_button_button} ${folder_route.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
+                                                                <Menu.Item key={folder_route.path} as="div" className={`${styles.navbar_button} ${folder_route.path == router.route ? "backdrop-brightness-[115%]" : ""}`}>
                                                                     <Link href={folder_route.path} >
-                                                                        <a onClick={() => { setNavbar(!navbar) }}>
+                                                                        <a className="" onClick={() => { setNavbar(!navbar) }}>
                                                                             {folder_route.name}
                                                                         </a>
                                                                     </Link>
