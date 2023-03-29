@@ -114,16 +114,6 @@ const Navbar: FC<NavbarProps> = (props) => {
                                 }
                             })
                         }
-                        <li className={styles.navbar_button} >
-                            <ThemeSwitch></ThemeSwitch>
-                        </li>
-                        <li className={styles.navbar_button}>
-                            <a href="https://app.clickup.com/9005057077/home">
-                                <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout">
-                                    <ArrowLeftOnRectangleIcon height="32px" />
-                                </button>
-                            </a>
-                        </li>
                         <li className={styles.navbar_button}>
                             <a href="mailto:contactmaebeeproductions@gmail.com">
                                 <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Contact Us">
@@ -135,6 +125,16 @@ const Navbar: FC<NavbarProps> = (props) => {
                             <a href="https://linktr.ee/MaebeeTV">
                                 <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Socials">
                                     Socials
+                                </button>
+                            </a>
+                        </li>
+                        <li className={styles.navbar_button} >
+                            <ThemeSwitch></ThemeSwitch>
+                        </li>
+                        <li className={styles.navbar_button}>
+                            <a href="https://app.clickup.com/9005057077/home">
+                                <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout">
+                                    <ArrowLeftOnRectangleIcon height="32px" />
                                 </button>
                             </a>
                         </li>
