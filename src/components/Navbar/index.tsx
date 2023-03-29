@@ -133,7 +133,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         </li>
                         <li className={styles.navbar_button}>
                             <a href="https://app.clickup.com/9005057077/home">
-                                <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Logout">
+                                <button className="px-3 py-1 flex flex-1 justify-center items-center" title="Staff Clickup">
                                     <ArrowLeftOnRectangleIcon height="32px" />
                                 </button>
                             </a>
