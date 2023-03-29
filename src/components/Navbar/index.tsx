@@ -71,7 +71,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                                             <Menu as="li" key={e.folder} className="relative">
                                                 <div className="flex-1 flex items-stretch flex-wrap md:flex-nowrap">
                                                     <Menu.Button className={styles.navbar_button}>
-                                                        <span className={styles.navbar_button_button}>
+                                                        <span className={styles.navbar_button}>
                                                             {e.folder} <ChevronDownIcon className="ml-1 mt-1" height="18px" />
                                                         </span>
                                                     </Menu.Button>
