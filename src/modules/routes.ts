@@ -11,14 +11,14 @@ export const routes: Route[] = [
     },
     {
         name: "Sweet Pea's Fire",
-        path: "/projects/sweet_peas_fire",
+        path: "/films/sweet_peas_fire",
         show_in_nav: true,
 
         navbar_options: {
             bg_color: "[#0084FF]",
             text_color: "white"
         },
-        folder: "Projects"        
+        folder: "Films"        
     },
     {
         name: "MaebeeTV Asks",
