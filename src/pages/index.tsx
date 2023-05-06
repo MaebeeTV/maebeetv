@@ -12,7 +12,7 @@ const Home: NextPage = () => {
             <div className="flex flex-col gap-3 items-center mx-10">
                 <div className="flex gap-32 items-center justify-center text-center min-h-[65vh] max-w-[80%] mb-8 flex-wrap md:flex-nowrap p-7">
                     <div className="md:inline hidden min-w-[150px]">
-                        <Image src="https://cdn.britannica.com/84/206384-050-00698723/Javan-gliding-tree-frog.jpg" width="400" height="400" alt="MaebeeTV Logo" />
+                        <Image src="/img/frog.jpg" width="400" height="400" alt="MaebeeTV Logo" />
                     </div>
                     <div className="flex flex-col gap-3">
                         <div className="text-4xl md:text-6xl text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
