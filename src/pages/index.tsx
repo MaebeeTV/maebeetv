@@ -12,7 +12,7 @@ const Home: NextPage = () => {
             <div className="flex flex-col gap-3 items-center mx-10">
                 <div className="flex gap-32 items-center justify-center text-center min-h-[65vh] max-w-[80%] mb-8 flex-wrap md:flex-nowrap p-7">
                     <div className="md:inline hidden min-w-[150px]">
-                        <Image src="/img/MaebeeTV-logos.png" width="400" height="400" alt="MaebeeTV Logo" />
+                        <Image src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fkids.nationalgeographic.com%2Fanimals%2Famphibians%2Ffacts%2Fred-eyed-tree-frog&psig=AOvVaw3gI831MrcsJ8Kj0X9x0WRe&ust=1683418829032000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLC--fu13_4CFQAAAAAdAAAAABAG" width="400" height="400" alt="MaebeeTV Logo" />
                     </div>
                     <div className="flex flex-col gap-3">
                         <div className="text-4xl md:text-6xl text-orange-400"><h1>Welcome to MaebeeTV!</h1></div>
